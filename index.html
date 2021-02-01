@@ -29,9 +29,9 @@
   
 <h4>Publications</h4>
 <ul>
-  <li>Rei Sato, Jun Sakuma, Youhei Akimoto. AdvantageNAS: Efficient Neural Architecture Search with Credit Assignment. AAAI, 2021, <a href="https://arxiv.org/abs/2012.06138">arXiv</a></li>
-  <li>佐藤怜, 福地一斗, 佐久間淳, 秋本洋平. 強化学習における遷移確率を用いたドメイン適応による方策の転移. 人工知能学会全国大会論文集, 2020, <a href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2020/0/JSAI2020_2J5GS203/_article/-char/ja/">J-STAGE</a></li> 
-  <li>佐藤怜, 秋本洋平, 佐久間淳. 貢献度分配を導入した方策勾配によるNeural Architecture Searchの高速化. 人工知能学会全国大会論文集, 2019, <a href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2019/0/JSAI2019_2P3J202/_article/-char/ja/">J-STAGE</a></li>
+  <li>[1] 佐藤怜, 秋本洋平, 佐久間淳. 貢献度分配を導入した方策勾配によるNeural Architecture Searchの高速化. 人工知能学会全国大会論文集, 2019, <a href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2019/0/JSAI2019_2P3J202/_article/-char/ja/">J-STAGE</a></li>
+  <li>[2] 佐藤怜, 福地一斗, 佐久間淳, 秋本洋平. 強化学習における遷移確率を用いたドメイン適応による方策の転移. 人工知能学会全国大会論文集, 2020, <a href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2020/0/JSAI2020_2J5GS203/_article/-char/ja/">J-STAGE</a></li> 
+  <li>[3] Rei Sato, Jun Sakuma, Youhei Akimoto. AdvantageNAS: Efficient Neural Architecture Search with Credit Assignment. AAAI, 2021, <a href="https://arxiv.org/abs/2012.06138">arXiv</a></li>
 </ul>
   
 
@@ -55,12 +55,7 @@
 深層学習ではモデルのアーキテクチャ(一種のハイパーパラメータ)が学習済みモデルの性能に大きな影響を与えますが，未知のタスクに適したアーキテクチャを探すのは大変な労力のかかる作業です．
 近年，Neural Architecture Search (NAS)と呼ばれる，深層学習のアーキテクチャをアルゴリズムによって自動で最適化する研究が盛んに行われています．
 本研究では勾配法によるNASの時間・空間計算量に着目し，GPUメモリ消費量を押さえながら少ない更新回数で収束する手法を提案しました．
-この研究に関する論文は2019年度 人工知能学会 全国大会学生奨励賞を受賞し，人工知能系のトップカンファレンスであるAAAIに採択されました．
-  <ul>
-    <li><u>佐藤怜</u>, 秋本洋平, 佐久間淳, 貢献度分配を導入した方策勾配によるNeural Architecture Searchの高速化, 人工知能学会全国大会, 2019, <a href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2019/0/JSAI2019_2P3J202/_article/-char/ja/">J-STAGE</a></li>
-    <li><u>Rei Sato</u>, Youhei Akimoto, Jun Sakuma, Acceleration of Neural Architecture Search by Policy Gradient with Credit Assignment, ACML Workshop, 2019, <a href="https://sites.google.com/view/statsmljapan19/accepted-posters?authuser=0">Workshop Accepted Posters</a></li>
-    <li><u>Rei Sato</u>, Jun Sakuma, Youhei Akimoto, AdvantageNAS: Efficient Neural Architecture Search with Credit Assignment, AAAI, 2021, <a href="https://arxiv.org/abs/2012.06138">arXiv</a></li>
-  </ul>
+この研究に関する論文[1]は2019年度 人工知能学会 全国大会学生奨励賞を受賞し，人工知能系のトップカンファレンスであるAAAIに採択[3]されました．
   
   
 <h4>[Research] sim2realの研究(2019.4 -)</h4>
@@ -69,11 +64,8 @@
 そこで，シミュレータ上で事前学習した強化学習エージェントを現実環境で運用する解決案が考えられますが，正確なシミュレータが常に得られるとは限りません．
 特に，vision-basedな(状態観測としてカメラ画像を受け取る)エージェントの場合，シミュレータに高精度なレンダラを搭載する必要がありますが，これは一般に困難です．
 このような問題設定はsim2realと呼ばれる分野で研究が進められています．
-本研究では低精度なレンダラのみ，時にはレンダラさえ用意されていないという困難な状況設定において，シミュレータで事前学習されたエージェントを現実環境で有効活用する手法について検討しています．
+本研究[2]では低精度なレンダラのみ，時にはレンダラさえ用意されていないという困難な状況設定において，シミュレータで事前学習されたエージェントを現実環境で有効活用する手法について検討しています．
 
-<ul>  
-<li><u>佐藤怜</u>, 福地一斗, 佐久間淳, 秋本洋平, 強化学習における遷移確率を用いたドメイン適応による方策の転移, 人工知能学会全国大会, 2020, <a href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2020/0/JSAI2020_2J5GS203/_article/-char/ja/">J-STAGE</a></li>
-</ul>
   
 <h4>[Survey] モデル圧縮の調査(2017.4 - 2018.3)</h4>
 深層学習モデルをビジネスで活用する際，計算コストやパラメータ容量の多さがネックとなる場合があります．

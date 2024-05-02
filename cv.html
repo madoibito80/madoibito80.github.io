@@ -6,7 +6,7 @@
   <body>
 
 <h2>Self-Introduction Page</h2>
-<img src="./profile01.png" width="300px" />
+<img src="./cv/profile01.png" width="300px" />
 
 
 <h3>Personal Information</h3>
@@ -77,20 +77,27 @@
 <hr />
 <h3>Key Activities</h3>
 <h5>Research on Neural Architecture Search (Apr. 2018 - Dec. 2020)</h5>
-Deep learning has achieved improvements in accuracy across various tasks, but many challenges remain. One such challenge is the selection of model architecture.
-In deep learning, the model's architecture (one of the hyperparameters) greatly impacts the performance of the trained model, and finding an appropriate architecture for an unknown task is a labor-intensive endeavor.
-To address this issue, there exists a field of research known as Neural Architecture Search (NAS), which focuses on algorithmically optimizing deep learning architectures.
+<center>
+  <figure>
+    <img src="./cv/reduction.png" width="400px" />
+    <figcaption><i>The architecture obtained through our search</i></figcaption>
+  </figure>
+</center>
+
+Deep learning has achieved improvements in accuracy across various tasks, but many challenges remain.
+One such challenge is the selection of model architecture.
+In deep learning, the model architecture (one of the hyperparameters) greatly impacts the performance of the trained model, and finding an appropriate architecture for an unknown task is a labor-intensive endeavor.
+To address this issue, a field of research known as Neural Architecture Search (NAS) exists, which focuses on algorithmically optimizing the architectures of deep neural networks.
 We focused on the time and space computational requirements of gradient-based NAS, proposing a method that converges with fewer updates while minimizing GPU memory consumption.
-This research was awarded the Student Incentive Award at a domestic AI conference (JSAI) and was accepted at the top AI conference, AAAI (acceptance rate of 21.4% ~ 1692/7911).
+This research received the Student Incentive Award at JSAI (a domestic AI conference), and was accepted at AAAI (a top AI conference) with an acceptance rate of 21.4% (~ 1692/7911).
+Please refer to <a href="https://arxiv.org/abs/2012.06138">this paper</a> for more details.
 
 <details>
-深層学習は種々のタスクで精度向上を達成しましたが，まだまだ課題はあります．その一つにモデルアーキテクチャの選択があります．
-深層学習ではモデルのアーキテクチャ（一種のハイパーパラメータ）が学習済みモデルの性能に大きな影響を与えますが，未知のタスクに適したアーキテクチャを探すのは大変な労力のかかる作業です．
-この問題に対処するため，Neural Architecture Search（NAS）と呼ばれる，深層学習のアーキテクチャをアルゴリズムによって自動で最適化する研究分野が存在します．
-本研究では勾配法によるNASの時間・空間計算量に着目し，GPUメモリ消費量を抑えながら少ない更新回数で収束する手法を提案しました．
-この研究に関する論文は2019年度 人工知能学会 全国大会学生奨励賞を受賞し，人工知能系のトップカンファレンスであるAAAIに採択(acceptance rate = 1692/7911 ≒ 21.4%)されました．
+  <summary>&#x1f1ef;&#x1f1f5;</summary>
+  深層学習のモデルアーキテクチャをアルゴリズムによって最適化する研究を行い，JSAIで学生奨励賞を受賞したほか，トップカンファレンスであるAAAIに論文が採択されました．
 </details>
-  
+
+
 <h5>Sim-to-Realの研究 (2019.4 - 2022.1)</h5>
 ロボット制御への応用も進んでいる強化学習ですが，現実世界でロボットを対話させながら行う学習にはコストやリスクが生じます．
 そこで，シミュレータ上で事前学習したエージェントを現実世界で運用する解決策が考えられますが，いつも正確なシミュレータが得られるとは限りません．

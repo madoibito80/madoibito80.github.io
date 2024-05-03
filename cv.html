@@ -103,13 +103,18 @@ Please refer to <a href="https://arxiv.org/abs/2012.06138">this paper</a> for mo
 </details>
 
 
-<h5>Sim-to-Realの研究 (2019.4 - 2022.1)</h5>
-ロボット制御への応用も進んでいる強化学習ですが，現実世界でロボットを対話させながら行う学習にはコストやリスクが生じます．
-そこで，シミュレータ上で事前学習したエージェントを現実世界で運用する解決策が考えられますが，いつも正確なシミュレータが得られるとは限りません．
-特に，vision-basedな（状態観測としてカメラ画像を受け取る）エージェントの場合，シミュレータに高精度なレンダラを搭載する必要がありますが，これは一般に困難です．
-こういったシミュレータと現実世界のギャップを扱う強化学習の問題は，Sim-to-Realと呼ばれる文脈で盛んに研究されています．
-本研究[2]では低精度なレンダラのみ，時にはレンダラさえ用意されていないという困難な状況設定において，シミュレータで事前学習したエージェントを現実世界で有効活用する手法を提案しました．
-この研究に関する論文はニューラルネットワークに関する国際会議であるIJCNNに採択[4](IEEE WCCI, acceptance rate = 1467/2646 ≒ 55.4%)されました．
+<h5>Research on Sim-to-Real in Reinforcement Learning (Apr. 2019 - Jan. 2022)</h5>
+Reinforcement learning is advancing in applications such as robot control, but training robots to interact in the real world can be costly and risky.
+A solution is to operate agents in the real world that were pre-trained in simulators, but accurate simulators are not always available.
+Especially for vision-based agents that receive camera images as state observations, it is generally difficult to equip simulators with high-precision renderers.
+The problem of bridging the gap between simulators and the real world in reinforcement learning is studied in the field known as Sim-to-Real.
+We propose a method for effectively utilizing agents pre-trained in simulators in the real world, even under challenging conditions with only low-precision renderers, or sometimes even without any renderers at all.
+The paper on this study was accepted at the IJCNN, with an acceptance rate of 55.4% (~ 1467/2646 for IEEE WCCI).
+
+<details>
+  <summary>&#x1f1ef;&#x1f1f5;</summary>
+  強化学習によるロボット制御のための転移学習に関する研究を行い，論文がIJCNNに採択されました．
+</details>
 
 
 <h5>Survey on Model Compression (Apr. 2017 - Mar. 2018)</h5>

@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="../../cv/sakura.css" type="text/css">
-  </head>
-  <body>
+<head>
+  <link rel="stylesheet" href="../../cv/sakura.css" type="text/css">
+</head>
+<body>
 
   <h2>0. Introduction</h2>
-    <strong>Environment</strong>
+    This article introduces methods for using certain Windows API functions from Python, which are useful for creating extensions for applications running on Windows whose source code is not available.
+    Windows API (also commonly known as Win32 API) is a collection of DLLs (Dynamic Link Libraries) that provide an interface for accessing Windows functionality.
+    The diverse functionalities of the Windows API include connecting to a running application (process), reading from and writing to its memory space, detecting access to specific memory regions, and intervening in the processing of threads within the process.
+    By utilizing these functions, it becomes possible to provide extensions such as recording the application's operational state over time or dynamically modifying its behavior (albeit in a limited manner) without accessing its source code.
+    The functionalities of the Windows API can be accessed from Python through ctypes, a standard Python library.
+    In this article, building on the background outlined above, I aim to share insights and Python code to assist those with similar goals.
+    <h6>Disclaimer</h6>
+    Software reverse engineering and modification may constitute a violation of laws or terms of service. This article does not intend to promote any illegal activities, and you should always check the relevant laws and licenses before proceeding.
+    <h6>Environment</h6>
     I have tested these programs in the following environment: The OS is Windows 11 23H2 (OS build 22631.4112), which is a 64-bit operating system.
-    The application used to test the implemented code operates as a 32-bit application within the WOW64 (Windows 32-bit on Windows 64-bit) environment, and our code has been optimized accordingly.
+    The application used to test the implemented code operates as a 32-bit application within the WOW64 (Windows 32-bit on Windows 64-bit), and my code has been optimized accordingly.
     The processor used is an Intel Core i5-12400.
+    Python version is 3.12.6.
 
-  <h2>1. </h2>
+  <h2>1. Reading Memory</h2>
+    The following script (memory_reader.py) defines functions to obtain the process ID or handle of a running process, enumerate the memory regions used by that process, and read specified memory regions.
     <script src="https://gist.github.com/madoibito80/6671bebd6f8ff3ec5008de5fb7e8298a.js"></script>
+ 
   <h2>2. </h2>
     <script src="https://gist.github.com/madoibito80/6726b929fd2442f7e5730b5df0dc3591.js"></script>
   <h2>3. </h2>
@@ -22,5 +33,5 @@
   <h2>5. </h2>
     <script src="https://gist.github.com/madoibito80/931d9a3bc44f8538ac5020898f492ba4.js"></script>
 
-  </body>
-  </html>
+</body>
+</html>

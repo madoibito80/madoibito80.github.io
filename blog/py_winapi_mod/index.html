@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Creating Extensions for Compiled Applications by Editing Memory Using Windows API in Python</title>
   <link rel="stylesheet" href="../../cv/sakura.css" type="text/css">
 </head>
 <body>
 
+  <div style="text-align: center;"><h2>Creating Extensions for Compiled Applications by Editing Memory Using Windows API in Python</h2>Sep. 2024</div>
+  
   <h2>0. Introduction</h2>
     This article introduces methods for using certain Windows API functions from Python, which are useful for creating extensions for applications running on Windows whose source code is not available.
     Windows API (also commonly known as Win32 API) is a collection of DLLs (Dynamic Link Libraries) that provide an interface for accessing Windows functionality.
     The diverse functionalities of the Windows API include connecting to a running application (process), reading from and writing to its memory space, detecting access to specific memory regions, and intervening in the processing of threads within the process.
-    By utilizing these functions, it becomes possible to provide extensions such as recording the application's operational state over time or dynamically modifying its behavior (albeit in a limited manner) without accessing its source code.
+    By utilizing these functions, it is possible to implement extensions, such as recording the application's state over time or dynamically modifying its behavior (albeit in a limited manner), without accessing its source code.
     The functionalities of the Windows API can be accessed from Python through ctypes, a standard Python library.
     In this article, building on the background outlined above, I aim to share insights and Python code to assist those with similar goals.
     <h6>Disclaimer</h6>
     Software reverse engineering and modification may constitute a violation of laws or terms of service. This article does not intend to promote any illegal activities, and you should always check the relevant laws and licenses before proceeding.
     <h6>Environment</h6>
-    I have tested these programs in the following environment: The OS is Windows 11 23H2 (OS build 22631.4112), which is a 64-bit operating system.
+    I have tested these programs in the following environment: The OS is Windows 11 23H2 (OS build 22631.4112), which is x64-based.
     The application used to test the implemented code operates as a 32-bit application within the WOW64 (Windows 32-bit on Windows 64-bit), and my code has been optimized accordingly.
-    The processor used is an Intel Core i5-12400.
     Python version is 3.12.6.
 
   <h2>1. Reading Memory</h2>
-    The following script (memory_reader.py) defines functions to obtain the process ID or handle of a running process, enumerate the memory regions used by that process, and read specified memory regions.
+    The following script (memory_reader.py) defines functions to obtain the process ID or handle of a running process, enumerate the memory regions used by a process, and read specified memory regions.
     <script src="https://gist.github.com/madoibito80/dbd3b213ae2f4916663e145b2858fcda.js"></script>
  
-  <h2>2. </h2>
+  <h2>2. Enumerating Modules</h2>
+    The following script (module_reader.py) defines a function that enumerates the modules loaded into memory by a process.
+    It also provides example code that displays the memory regions occupied by each module.
+    The memory address where a module is loaded may differ each time, but knowing the base address of a specific module (such as a DLL) enables the resolution of multi-level pointers, as described in the next section.
     <script src="https://gist.github.com/madoibito80/5fa6f477edba572215bc56584621a4bc.js"></script>
   
   <h2>3. </h2>
     <script src="https://gist.github.com/madoibito80/3f41079e246715b36a3f092e12b9359a.js"></script>
 
-  <h2>4. </h2>
+  <h2>4. Writing Memory</h2>
     <script src="https://gist.github.com/madoibito80/6d9ddf2cfbc3947ace75e26375c44bd3.js"></script>
   
   <h2>5. </h2>

@@ -7,7 +7,7 @@
 <body>
 
   <div style="text-align: center;"><h2>Creating Extensions for Compiled Applications by Editing Memory Using Windows API in Python</h2>reisato<br />Sep. 2024</div>
-  
+
   <h2>0. Introduction</h2>
     This article introduces methods for using certain Windows API functions from Python, which are useful for creating extensions for applications running on Windows whose source code is not available.
     Windows API (also commonly known as Win32 API) is a collection of DLLs (Dynamic Link Libraries) that provide an interface for accessing Windows functionality.
@@ -25,13 +25,13 @@
 
   <h2>1. Reading Memory</h2>
     The following script (<code>memory_reader.py</code>) defines functions to obtain the process ID or handle of a running process, enumerate the memory regions used by a process, and read specified memory regions.
-    <script src="https://gist.github.com/madoibito80/dbd3b213ae2f4916663e145b2858fcda.js"></script>
+    <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=memory_reader.py"></script>
  
   <h2>2. Enumerating Modules</h2>
     The following script (<code>module_reader.py</code>) defines a function that enumerates the modules (e.g. .exe, .dll) loaded into memory by a process.
     It also provides example code that displays the memory regions occupied by each module.
     The memory address where a module is loaded may differ each time, but knowing the base address of a specific module enables the resolution of multi-level pointers, as described in the next section.
-    <script src="https://gist.github.com/madoibito80/5fa6f477edba572215bc56584621a4bc.js"></script>
+    <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=module_reader.py"></script>
   
   <h2>3. Resolving Multi-Level Pointers</h2>
     The following script (<code>pointer_chaser.py</code>) defines a function to resolve multi-level pointers.
@@ -42,17 +42,17 @@
     <br />
     The <code>get_address_by_pointer_offsets</code> function defines the logic to resolve a pointer chain by navigating through a series of pointer offsets.
     This function takes a module name and a series of offsets, resolving the final memory address by applying each offset sequentially.
-    <script src="https://gist.github.com/madoibito80/3f41079e246715b36a3f092e12b9359a.js"></script>
-    As an example, the above function was used to determine the address where the memory stores the player's XYZ coordinates in a game.
+    <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=pointer_chaser.py"></script>
+    As an example, the above function was used to identify the address where the memory stores the player's XYZ coordinates in a game.
     The specific values of the pointer chain were identified using Cheat Engine 7.5, and the steps for this operation were guided by this <a href="https://ethical-cheats.com/03_%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%AA%E3%82%B9%E3%83%88%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E5%8C%96%E3%81%AB%E5%AF%BE%E5%BF%9C/03_%E3%83%9D%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%AA%E3%82%B9%E3%83%88%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%83%A9%E3%83%B3%E3%83%80%E3%83%A0%E5%8C%96%E3%81%AB%E5%AF%BE%E5%BF%9C.html">blog</a>.
 
   <h2>4. Writing Memory</h2>
     The following script (<code>memory_writer.py</code>) defines a function that allows writing a specified value into memory.
     By using this function, you may be able to modify the behavior of a running application.
-    <script src="https://gist.github.com/madoibito80/6d9ddf2cfbc3947ace75e26375c44bd3.js"></script>
+    <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=memory_writer.py"></script>
   
   <h2>5. Intercepting and Modifying Memory Access</h2>
-    I have previously explained how to determine the memory address where a variable is stored and how to write a new value to that address.
+    I have previously explained how to identify the memory address where a variable is stored and how to write a new value to that address.
     But what happens if the number of bytes in the new value is greater than that of the old value?
     For example, when modifying a string, if the new value (<code>$str_new</code>) is longer than the old value (<code>$str_old</code>), and another variable is stored immediately after the end of <code>$str_old</code>, the memory area of that variable may be overwritten and corrupted.
     <br />
@@ -64,20 +64,20 @@
     By repeating this process, the monitored process is expected to correctly access both <code>$str_new</code> and the variable in <code>region_1</code>.
     <br />
     As a preparation for introducing the code to achieve this, the necessary constants are defined in the following script (<code>const.py</code>).
-    <script src="https://gist.github.com/madoibito80/a12a0e36a64837f214729b7e14c0a9b2.js"></script>
+    <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=const.py"></script>
     Next, I will describe the function <code>intercept_memory_access</code> defined in the script (<code>memory_interceptor.py</code>).
     This function sets access restrictions on memory pages containing the target address and catches Access Violation Exceptions when access occurs.
     During exception handling, the execution of the attached process is temporarily suspended, allowing you to modify the contents of the memory in the meantime.
     <br />
     Additionally, the access restriction is temporarily lifted, and a Single Step Exception is set up for the thread that caused the access.
-    After that, by specifying the DBG_CONTINUE flag and calling the <code>ContinueDebugEvent</code> function, the exception handling is concluded, and the instruction is re-executed.
+    Afterward, by calling the <code>ContinueDebugEvent</code> function with the <code>DBG_CONTINUE</code> flag, the exception handling concludes, and the instruction is re-executed.
     During re-execution, since the access restriction on memory is lifted, the instruction that caused the exception is processed normally.
     Once the execution of the instruction is complete, a Single Step Exception is triggered, and the access restriction on memory is re-applied during this exception handling.
     <br />
     By repeating this process, it becomes possible to detect when the monitored process accesses specific memory regions and switch the memory contents on a per-instruction basis.
     This function automatically terminates after timeout seconds from the initial memory modification.
     However, there is room for considering more efficient methods, such as terminating when a specific instruction is executed.
-    <script src="https://gist.github.com/madoibito80/4ec4810dee0e6503d4102979e467a033.js"></script>
+    <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=memory_interceptor.py"></script>
 
 </body>
 </html>

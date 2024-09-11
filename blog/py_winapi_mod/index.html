@@ -65,7 +65,7 @@
     <br />
     As a preparation for introducing the code to achieve this, the necessary constants are defined in the following script (<code>const.py</code>).
     <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=const.py"></script>
-    Next, I will describe the function <code>intercept_memory_access</code> defined in the script (<code>memory_interceptor.py</code>).
+    Next, I will describe the function <code>intercept_memory_access</code> defined in the following script (<code>memory_interceptor.py</code>).
     This function sets access restrictions on memory pages containing the target address and catches Access Violation Exceptions when access occurs.
     During exception handling, the execution of the attached process is temporarily suspended, allowing you to modify the contents of the memory in the meantime.
     <br />

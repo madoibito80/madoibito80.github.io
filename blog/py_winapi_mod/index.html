@@ -73,8 +73,8 @@
     Afterward, by calling <code>ContinueDebugEvent</code> function with <code>DBG_CONTINUE</code> flag, the exception handling concludes, and the instruction is re-executed.
     During re-execution, since the access restriction on memory is lifted, the instruction that caused the exception is processed normally.
     Once the execution of the instruction is complete, a Single Step Exception is triggered, and the access restriction on memory is re-applied during this exception handling.
-    <br />
     By repeating this process, it becomes possible to detect when the monitored process accesses specific memory regions and switch the memory contents on a per-instruction basis.
+    <br />
     This function automatically terminates after timeout seconds from the initial memory modification.
     However, there is room for considering more efficient methods, such as terminating when a specific instruction is executed.
     <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=memory_interceptor.py"></script>

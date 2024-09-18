@@ -53,7 +53,7 @@
   
   <h2>5. Intercepting and Modifying Memory Access</h2>
     I have previously explained how to identify the memory address where a variable is stored and how to write a new value to that address.
-    But what happens if the number of bytes in the new value is greater than that of the old value?
+    But what happens if the number of bytes in the new value is greater than in the old value?
     For example, when modifying a string, if the new value (<code>$str_new</code>) is longer than the old value (<code>$str_old</code>), and another variable is stored immediately after the end of <code>$str_old</code>, the memory area of that variable may be overwritten and corrupted.
     <br />
     Here is one method to solve this problem.
@@ -61,19 +61,21 @@
     We define <code>memory[$addr : $addr + len($str_old)]</code> as <code>region_0</code> and <code>memory[$addr + len($str_old) : $addr + len($str_new)]</code> as <code>region_1</code>.
     If the monitored process accesses <code>region_0</code>, write <code>$str_new</code> to the combined area of <code>region_0</code> and <code>region_1</code>.
     Additionally, if <code>region_1</code> is accessed, write back the original value before <code>$str_new</code> was written.
-    By repeating this process, the monitored process is expected to correctly access both <code>$str_new</code> and the variable in <code>region_1</code>.
+    By repeating this procedure, the monitored process is expected to correctly access both <code>$str_new</code> and the variable in <code>region_1</code>.
     <br />
     As a preparation for introducing the code to achieve this, the necessary constants are defined in the following script (<code>const.py</code>).
     <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=const.py"></script>
     Next, I will describe the function <code>intercept_memory_access</code> defined in the following script (<code>memory_interceptor.py</code>).
-    This function sets access restrictions on memory pages containing the target address and catches Access Violation Exceptions when access occurs.
+    The <code>VirtualProtectEx</code> function sets access restrictions on memory pages containing the target address and catches <code>ACCESS_VIOLATION</code> exceptions when access occurs.
     During exception handling, the execution of the attached process is temporarily suspended, allowing you to modify the contents of the memory in the meantime.
     <br />
-    Additionally, the access restriction is temporarily lifted, and a Single Step Exception is set up for the thread that caused the access.
+    Additionally, during this exception handling, the access restriction is temporarily lifted, and the thread that caused the access is configured to report a <code>WX86_SINGLE_STEP</code> exception.
+    This exception occurs when a thread with a specific value set in the EFLAGS register executes a single instruction.
+    <br />
     Afterward, by calling <code>ContinueDebugEvent</code> function with <code>DBG_CONTINUE</code> flag, the exception handling concludes, and the instruction is re-executed.
     During re-execution, since the access restriction on memory is lifted, the instruction that caused the exception is processed normally.
-    Once the execution of the instruction is complete, a Single Step Exception is triggered, and the access restriction on memory is re-applied during this exception handling.
-    By repeating this process, it becomes possible to detect when the monitored process accesses specific memory regions and switch the memory contents on a per-instruction basis.
+    Once the instruction completes, a <code>WX86_SINGLE_STEP</code> exception is raised, and the access restriction on memory is re-applied during this exception handling.
+    By repeating this procedure, it becomes possible to detect when the monitored process accesses specific memory regions and to switch the memory contents on a per-instruction basis.
     <br />
     This function automatically terminates after timeout seconds from the initial memory modification.
     However, there is room for considering more efficient methods, such as terminating when a specific instruction is executed.

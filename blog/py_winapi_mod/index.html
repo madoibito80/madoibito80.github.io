@@ -65,8 +65,9 @@
     <br />
     As a preparation for introducing the code to achieve this, the necessary constants are defined in the following script (<code>const.py</code>).
     <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=const.py"></script>
-    Next, I will describe the function <code>intercept_memory_access</code> defined in the following script (<code>memory_interceptor.py</code>).
-    The <code>VirtualProtectEx</code> function sets access restrictions on memory pages containing the target address and catches <code>ACCESS_VIOLATION</code> exceptions when access occurs.
+    Next, I will describe the following script (<code>memory_interceptor.py</code>).
+    <br />
+    <code>VirtualProtectEx</code> function sets access restrictions on memory pages containing the target address and catches <code>ACCESS_VIOLATION</code> exceptions when access occurs.
     During exception handling, the execution of the attached process is temporarily suspended, allowing you to modify the contents of the memory in the meantime.
     <br />
     Additionally, during this exception handling, the access restriction is temporarily lifted, and the thread that caused the access is configured to report a <code>WX86_SINGLE_STEP</code> exception.
@@ -77,7 +78,7 @@
     Once the instruction completes, a <code>WX86_SINGLE_STEP</code> exception is raised, and the access restriction on memory is re-applied during this exception handling.
     By repeating this procedure, it becomes possible to detect when the monitored process accesses specific memory regions and to switch the memory contents on a per-instruction basis.
     <br />
-    This function automatically terminates after timeout seconds from the initial memory modification.
+    <code>intercept_memory_access</code> function, which constitutes the loop mentioned above, automatically terminates after the timeout period from the initial memory modification.
     However, there is room for considering more efficient methods, such as terminating when a specific instruction is executed.
     <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=memory_interceptor.py"></script>
 

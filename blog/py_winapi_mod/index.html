@@ -65,17 +65,17 @@
     <br />
     As a preparation for introducing the code to achieve this, the necessary constants are defined in the following script (<code>const.py</code>).
     <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=const.py"></script>
-    Next, I will describe the following script (<code>memory_interceptor.py</code>).
+    Next, I will describe the following script (<code>memory_interceptor.py</code>) which implements the idea described above.
     <br />
-    <code>VirtualProtectEx</code> function sets access restrictions on memory pages containing the target address and catches <code>ACCESS_VIOLATION</code> exceptions when access occurs.
+    <code>VirtualProtectEx</code> function sets access restrictions on memory pages containing the target address and catches <code>ACCESS_VIOLATION</code> exception when access occurs.
     During exception handling, the execution of the attached process is temporarily suspended, allowing you to modify the contents of the memory in the meantime.
     <br />
-    Additionally, during this exception handling, the access restriction is temporarily lifted, and the thread that caused the access is configured to report a <code>WX86_SINGLE_STEP</code> exception.
+    Additionally, during this exception handling, the access restriction is temporarily lifted, and the thread that caused the access is configured to report <code>WX86_SINGLE_STEP</code> exception.
     This exception occurs when a thread with a specific value set in the EFLAGS register executes a single instruction.
     <br />
     Afterward, by calling <code>ContinueDebugEvent</code> function with <code>DBG_CONTINUE</code> flag, the exception handling concludes, and the instruction is re-executed.
     During re-execution, since the access restriction on memory is lifted, the instruction that caused the exception is processed normally.
-    Once the instruction completes, a <code>WX86_SINGLE_STEP</code> exception is raised, and the access restriction on memory is re-applied during this exception handling.
+    Once the instruction completes, <code>WX86_SINGLE_STEP</code> exception is raised, and the access restriction on memory is re-applied during this exception handling.
     By repeating this procedure, it becomes possible to detect when the monitored process accesses specific memory regions and to switch the memory contents on a per-instruction basis.
     <br />
     <code>intercept_memory_access</code> function, which constitutes the loop mentioned above, automatically terminates after the timeout period from the initial memory modification.

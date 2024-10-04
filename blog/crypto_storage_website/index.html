@@ -68,13 +68,16 @@
     <a href="https://github.com/ArweaveTeam/arweave/blob/694f4cc3731c1c5d04830d1e45896ed020b6a21d/apps/arweave/src/ar_pricing.erl#L433-L455">[code4]</a>
     <a href="https://github.com/ArweaveTeam/arweave/blob/758de1e553d0370bf58b8ef658ecd64542658516/apps/arweave/include/ar_pricing.hrl#L55-L66">[code5]</a>. In other
     words, miners are considered to have agreed that the recent block rewards exceed the storage cost, and <code>R_endowment</code> plays a role in preventing a sharp
-    decline in USD-denominated rewards for the next block to be generated. Therefore, the total rewards paid to all miners are generally ensured to exceed the overall
-    storage cost of the entire network at any given moment.
+    decline in USD-denominated rewards for the next block to be generated.
+
+    <br />
+    Therefore, the total rewards paid to all miners are generally ensured to exceed the overall storage cost of the entire network at any given moment. Arweave's
+    developers predict that the network will continue for over 200 years due to the incentive mechanism, which is virtually permanent.
 
     <br />
     <strong>Succinct Proof of Random Access (SPoRA)</strong>
     If rewards are paid for block generation, how are block generation and data storage related? In Arweave, the data stored across the entire network is called the
-    weave, and to mine a new block, it is necessary to calculate a hash using a randomly selected portion of the weave. Therefore, to increase the probability of
+    <i>weave</i>, and to mine a new block, it is necessary to calculate a hash using a randomly selected portion of the weave. Therefore, to increase the probability of
     generating new blocks and earning rewards, miners are incentivized to store as many partitions of the weave as possible
     <a href="https://2-6-spec.arweave.dev/">[spec2.6]</a>. Additionally, since the miner who finds the appropriate hash first will receive the reward, they have an
     incentive to use storage with faster read speeds

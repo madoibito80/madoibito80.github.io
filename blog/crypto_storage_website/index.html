@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Storing Data Permanently, as a Website: A Review of Arweave and AR.IO</title>
+    <link rel="stylesheet" href="../../cv/sakura.css" type="text/css" />
+  </head>
+  <body>
+    <div style="text-align: center">
+      <h2>Storing Data Permanently, as a Website: A Review of Arweave and AR.IO</h2>
+      Rei Sato<br />Oct. 2024
+    </div>
+
+    <h2>1. Introduction</h2>
+    I am interested in remote storage that meets the following five requirements:
+    <ul>
+      <li>
+        <strong>Decentralizing</strong>: Meaning that the service provider is not a single organization, but a group of independent parties. Unlike centralized services,
+        service provision and data storage will continue even if a specific actor withdraws. This prevents data loss due to the whims of service providers.
+      </li>
+      <li><strong>Storing Over 1 GB of Data</strong>: Sufficient capacity to store multiple media files such as images and videos.</li>
+      <li><strong>Paying with Cryptocurrency</strong>: Enhances anonymity.</li>
+      <li><strong>Maintaining Data for Over 10 Years without Contract Renewal</strong>: Data will not be lost even if you lose interest in it or neglect payments.</li>
+      <li><strong>Publishing Data as a Website</strong>: Allows easy distribution of data to a large audience, similar to GitHub Pages.</li>
+    </ul>
+    I have realized that <i>Arweave</i> and <i>AR.IO</i>, two blockchain projects, together fulfill these conditions. In section 2, I review how Arweave and AR.IO meet
+    the five conditions. In section 3, I demonstrate how to store data on Arweave and display it via AR.IO.
+
+    <h2>2. Whether Arweave and AR.IO Together Meet the Five Conditions</h2>
+    <h3>2.1. Decentralizing</h3>
+    Arweave is a peer-to-peer network comprised of multiple independent nodes (miners) that store data previously entrusted by users. Your data is not stored in a single
+    location; instead, it is ideally replicated more than 20 times and distributed across multiple nodes, making it robust against data loss
+    <a href="https://github.com/ArweaveTeam/arweave/blob/758de1e553d0370bf58b8ef658ecd64542658516/apps/arweave/include/ar_pricing.hrl#L7-L25">[code1]</a>. To entrust new
+    data to the network, users attach it to a request called a <i>transaction</i> and send it to the network. Additionally, Arweave's code and specifications are
+    available as open-source software (OSS), allowing anyone to join the network as a new miner, which makes it a decentralized system.
+
+    <h3>2.2. Storing Over 1 GB of Data</h3>
+    Transactions submitted by users can include data, and the size of this data is effectively unlimited, making it possible to store large binary files as well. In most
+    client implementations, large files are divided into small chunks before being uploaded
+    <a href="https://github.com/ArweaveTeam/arweave-js/blob/51c2b58a0c0906a4a487881cc20ddad59f3c08b6/src/common/lib/transaction-uploader.ts">[code2]</a>.
+
+    <h3>2.3. Paying with Cryptocurrency</h3>
+    The user's payment, which is the transaction fee, is required only once when submitting a transaction. This fee is paid using Arweave's token, AR, which is a
+    cryptocurrency and can be obtained on exchanges such as Bybit. In the official client, the default setting is to pay the minimum transaction fee
+    <a href="https://github.com/ArweaveTeam/arweave-js/blob/bfa6d7334662ba80be394d2c6a70bfd12f276b87/src/common/common.ts#L122-L128">[code3]</a>
+    <a href="https://docs.arweave.org/developers/arweave-node-server/http-api#get-transaction-price">[api1]</a>. Note that the minimum transaction fee varies based on the
+    size of the attached data, and transactions below this threshold will be rejected, meaning that submitting larger files requires higher payments.
+
+    <h3>2.4. Maintaining Data for Over 10 Years without Contract Renewal</h3>
+    <strong>Reward</strong>
+    As previously mentioned, the user's payment is made only once when submitting a transaction. However, do miners have the incentive to store data for over 10 years
+    with only a one-time payment from users?
+
+    <br />
+    Miners aggregate up to 1,000 transactions submitted by users into a <i>block</i> and perform the task of having it approved by the network. Miners who successfully
+    complete this task receive rewards. The task of generating new blocks is called <i>mining</i>, and a new block is generated approximately every 2 minutes across the
+    network.
+
+    <br />
+    Rewards for miners are composed of the sum of <code>R_fees</code>, <code>R_inflation</code>, and <code>R_endowment</code>
+    <a href="https://www.arweave.org/yellow-paper.pdf">[yellow]</a>. <code>R_fees</code> refer to the total transaction fees included in a block, but not all of these
+    fees are immediately paid to miners. Instead, the majority is reserved in the endowment pool for future <code>R_endowment</code> payments. <code>R_inflation</code> is
+    a predetermined reward paid by the protocol, which decreases as the block height (the number of generated blocks) increases. <code>R_endowment</code> is only paid
+    from the endowment pool when the sum of the other two components falls below the storage cost.
+    <br />
+    The storage cost for keeping 1 GiB of data for 1 minute is calculated using the miner rewards from the last 30 days, while considering the AR/USD exchange rate
+    <a href="https://www.arweave.org/files/arweave-lightpaper.pdf">[p2023]</a>
+    <a href="https://2-6-spec.arweave.dev/">[spec2.6]</a>
+    <a href="https://github.com/ArweaveTeam/arweave/blob/694f4cc3731c1c5d04830d1e45896ed020b6a21d/apps/arweave/src/ar_pricing.erl#L433-L455">[code4]</a>
+    <a href="https://github.com/ArweaveTeam/arweave/blob/758de1e553d0370bf58b8ef658ecd64542658516/apps/arweave/include/ar_pricing.hrl#L55-L66">[code5]</a>. In other
+    words, miners are considered to have agreed that the recent block rewards exceed the storage cost, and <code>R_endowment</code> plays a role in preventing a sharp
+    decline in USD-denominated rewards for the next block to be generated. Therefore, the total rewards paid to all miners are generally ensured to exceed the overall
+    storage cost of the entire network at any given moment.
+
+    <br />
+    <strong>Succinct Proof of Random Access (SPoRA)</strong>
+    If rewards are paid for block generation, how are block generation and data storage related? In Arweave, the data stored across the entire network is called the
+    weave, and to mine a new block, it is necessary to calculate a hash using a randomly selected portion of the weave. Therefore, to increase the probability of
+    generating new blocks and earning rewards, miners are incentivized to store as many partitions of the weave as possible
+    <a href="https://2-6-spec.arweave.dev/">[spec2.6]</a>. Additionally, since the miner who finds the appropriate hash first will receive the reward, they have an
+    incentive to use storage with faster read speeds
+    <a href="https://github.com/ArweaveTeam/arweave-standards/blob/128d2a90782c859532a5579c61ac591dacbe1152/ans/ANS-103.md">[103]</a>.
+
+    <br />
+    In Arweave (especially from version 2.6 onward), the probability of earning rewards increases based on the following factors: (1) holding partitions that are less
+    likely to be held by other miners, (2) consolidating storage into as few nodes as possible, and (3) storing as many unique partitions as possible on each node. These
+    encourage the prevention of imbalances in the number of partition replicas
+    <a href="https://2-6-spec.arweave.dev/">[spec2.6]</a>
+    <a href="https://www.arweave.org/yellow-paper.pdf">[yellow]</a>.
+
+    <h3>2.5. Publishing Data as a Website: AR.IO</h3>
+    <strong>Gateway</strong>
+    Arweave's miner nodes are equipped with an API that returns data from previously generated blocks in response to HTTP requests, allowing content (e.g., HTML, JPEG) to
+    be displayed in web browsers
+    <a href="https://github.com/ArweaveTeam/arweave/blob/0e8ea0be08c546787a46f1d952d27a6346a652cc/http_iface_docs.md#get-transaction-body-as-html-via-id">[api2]</a>
+    <a href="https://docs.arweave.org/developers/arweave-node-server/http-api#get-transaction-data-with-extension">[api3]</a>. However, miners have no incentive to make
+    this API publicly accessible to a large number of users or to maintain high availability. In fact, in most cases, no response can be received from the API of a
+    randomly selected node <a href="https://arweave.net/peers">[peers]</a>. To ensure long-term access to data stored on the Arweave network via web browsers, it is
+    necessary to consider both the incentive design and decentralized management of the web servers that provide access to Arweave, referred to as <i>gateways</i>.
+
+    <br />
+    <strong>AR.IO</strong>
+    Here, I mention AR.IO, a noteworthy gateway project. In AR.IO, nodes serve not only as gateways that return content stored on the Arweave network in response to HTTP
+    requests, but also as observers that monitor other gateways. By fulfilling these roles, nodes are rewarded with IO tokens from the protocol, providing an incentive to
+    increase their availability. The tokens are supplied both by the protocol itself and through revenue earned from the Arweave Name System (ArNS), which functions
+    similarly to DNS on AR.IO
+    <a href="https://stmnnh3s5hfbfaxxskvhx3d4l5vkbdxnep34ginzy5bsrlzzxxha.arweave.net/lNjWn3LpyhKC95Kqe-x8X2qgju0j98MhucdDKK85vc4">[p2024]</a>. As of the time of writing,
+    the mainnet has not yet launched, but several instances are operational on the testnet <a href="https://network-portal.app/#/gateways">[nodes]</a>.
+
+    <h2>3. Practice</h2>
+    I present the minimum code to send a transaction with image data, which is based on the official client and has been tested on Node.js v20.17.0
+    <a href="https://github.com/ArweaveTeam/arweave-js">[repo]</a>.
+
+    <script src="https://gist.github.com/madoibito80/9d9f2ca4131f0b7dd661f7ae0cf7479f.js"></script>
+
+    <div style="text-align: center">
+      <figure>
+        <img src="https://arweave.net/tx/ScgJil4GzJVkL9wC3xjGKnXt_BEEs334Z2WQqUGdt08/data.jpeg" style="width: 70%" />
+        <figcaption><i>Beautiful venetia forever.</i></figcaption>
+      </figure>
+    </div>
+    The above image is stored on Arweave network and is downloaded to your browser via the
+    <a href="https://arweave.net/tx/ScgJil4GzJVkL9wC3xjGKnXt_BEEs334Z2WQqUGdt08/data.jpeg">arweave.net</a> gateway. You can also access the data from other gateways, such
+    as <a href="https://ar-io.dev/tx/ScgJil4GzJVkL9wC3xjGKnXt_BEEs334Z2WQqUGdt08/data.jpeg">ar-io.dev</a> or
+    <a href="https://permagate.io/tx/ScgJil4GzJVkL9wC3xjGKnXt_BEEs334Z2WQqUGdt08/data.jpeg">permagate.io</a>. The size of the image is 290KB, and it cost approximately
+    0.0004 AR x $22 ~ $0.0088 to store it permanently. Since there is no way to delete information once it has been stored on the network, and it can be accessed by
+    anyone, please be careful when considering uploading sensitive information.
+    <hr />
+  </body>
+</html>

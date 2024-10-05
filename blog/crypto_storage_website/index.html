@@ -46,7 +46,7 @@
     size of the attached data, and transactions below this threshold will be rejected, meaning that submitting larger files requires higher payments.
 
     <h3>2.4. Maintaining Data for Over 10 Years without Contract Renewal</h3>
-    <strong>Reward</strong>
+    <strong>Reward Emission</strong>
     As previously mentioned, the user's payment is made only once when submitting a transaction. However, do miners have the incentive to store data for over 10 years
     with only a one-time payment from users?
 
@@ -66,13 +66,16 @@
     <a href="https://www.arweave.org/files/arweave-lightpaper.pdf">[p2023]</a>
     <a href="https://2-6-spec.arweave.dev/">[spec2.6]</a>
     <a href="https://github.com/ArweaveTeam/arweave/blob/694f4cc3731c1c5d04830d1e45896ed020b6a21d/apps/arweave/src/ar_pricing.erl#L433-L455">[code4]</a>
-    <a href="https://github.com/ArweaveTeam/arweave/blob/758de1e553d0370bf58b8ef658ecd64542658516/apps/arweave/include/ar_pricing.hrl#L55-L66">[code5]</a>. In other
-    words, miners are considered to have agreed that the recent block rewards exceed the storage cost, and <code>R_endowment</code> plays a role in preventing a sharp
-    decline in USD-denominated rewards for the next block to be generated.
+    <a href="https://github.com/ArweaveTeam/arweave/blob/758de1e553d0370bf58b8ef658ecd64542658516/apps/arweave/include/ar_pricing.hrl#L55-L66">[code5]</a>. Then, the
+    reward for the miner who generates the block is calculated as
+    <code>total data size (in GiB) on network × storage cost per GiB per minute × average block generation time (2 minutes)</code>. Therefore, the total rewards paid to
+    miners are generally ensured to exceed the overall storage cost of the entire network at any given moment.
 
     <br />
-    Therefore, the total rewards paid to all miners are generally ensured to exceed the overall storage cost of the entire network at any given moment. Arweave's
-    developers predict that the network will continue for over 200 years due to the incentive mechanism, which is virtually permanent.
+    <strong>Transaction Fee</strong>
+    In order to continue the incentive mechanism over 200 years (which is virtually permanent), the transaction fee for users is calculated as the perpetual storage cost.
+    To prevent the fee from diverging, Arweave assumes the cost of storage will decay consistently
+    <a href="https://github.com/ArweaveTeam/arweave/blob/694f4cc3731c1c5d04830d1e45896ed020b6a21d/apps/arweave/src/ar_pricing.erl#L240-L251">[code6]</a>.
 
     <br />
     <strong>Succinct Proof of Random Access (SPoRA)</strong>

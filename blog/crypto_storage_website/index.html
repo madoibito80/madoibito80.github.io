@@ -43,38 +43,37 @@
     cryptocurrency and can be obtained on exchanges such as Bybit. In the official client, the default setting is to pay the minimum transaction fee
     <a href="https://github.com/ArweaveTeam/arweave-js/blob/bfa6d7334662ba80be394d2c6a70bfd12f276b87/src/common/common.ts#L122-L128">[code3]</a>
     <a href="https://docs.arweave.org/developers/arweave-node-server/http-api#get-transaction-price">[api1]</a>. Note that the minimum transaction fee varies based on the
-    size of the attached data, and transactions below this threshold will be rejected, meaning that submitting larger files requires higher payments.
+    size of the attached data, and transactions below this fee will be rejected, meaning that submitting larger files requires higher payments.
 
     <h3>2.4. Maintaining Data for Over 10 Years without Contract Renewal</h3>
     <strong>Reward Emission</strong>
-    As previously mentioned, the user's payment is made only once when submitting a transaction. However, do miners have the incentive to store data for over 10 years
-    with only a one-time payment from users?
+    As previously mentioned, the user's payment is made only once when submitting a transaction. But do miners have the incentive to store data for over 10 years with
+    only a one-time payment from users?
 
     <br />
-    Miners aggregate up to 1,000 transactions submitted by users into a <i>block</i> and perform the task of having it approved by the network. Miners who successfully
-    complete this task receive rewards. The task of generating new blocks is called <i>mining</i>, and a new block is generated approximately every 2 minutes across the
-    network.
-
-    <br />
-    Rewards for miners are composed of the sum of <code>R_fees</code>, <code>R_inflation</code>, and <code>R_endowment</code>
-    <a href="https://www.arweave.org/yellow-paper.pdf">[yellow]</a>. <code>R_fees</code> refer to the total transaction fees included in a block, but not all of these
-    fees are immediately paid to miners. Instead, the majority is reserved in the endowment pool for future <code>R_endowment</code> payments. <code>R_inflation</code> is
-    a predetermined reward paid by the protocol, which decreases as the block height (the number of generated blocks) increases. <code>R_endowment</code> is only paid
-    from the endowment pool when the sum of the other two components falls below the storage cost.
-    <br />
-    The storage cost for keeping 1 GiB of data for 1 minute is calculated using the miner rewards from the last 30 days, while considering the AR/USD exchange rate
+    In order for miners to receive rewards, they need to bundle up to 1,000 transactions submitted by users into a <i>block</i> and have it approved by the network. The
+    task of generating new blocks is called <i>mining</i>, and a new block is generated approximately every 2 minutes across the network. The reward for the miner who
+    generates the block is calculated to exceed
+    <code>total data size (in GiB) on network × storage cost per GiB per minute × average block generation time (2 minutes)</code>. Therefore, the total rewards paid to
+    miners are generally ensured to exceed the overall storage cost of the entire network at any given moment. Note that the storage cost for keeping 1 GiB of data for 1
+    minute is calculated using the miner rewards from the last 30 days, while considering the AR/USD exchange rate
     <a href="https://www.arweave.org/files/arweave-lightpaper.pdf">[p2023]</a>
     <a href="https://2-6-spec.arweave.dev/">[spec2.6]</a>
     <a href="https://github.com/ArweaveTeam/arweave/blob/694f4cc3731c1c5d04830d1e45896ed020b6a21d/apps/arweave/src/ar_pricing.erl#L433-L455">[code4]</a>
-    <a href="https://github.com/ArweaveTeam/arweave/blob/758de1e553d0370bf58b8ef658ecd64542658516/apps/arweave/include/ar_pricing.hrl#L55-L66">[code5]</a>. Then, the
-    reward for the miner who generates the block is calculated as
-    <code>total data size (in GiB) on network × storage cost per GiB per minute × average block generation time (2 minutes)</code>. Therefore, the total rewards paid to
-    miners are generally ensured to exceed the overall storage cost of the entire network at any given moment.
+    <a href="https://github.com/ArweaveTeam/arweave/blob/758de1e553d0370bf58b8ef658ecd64542658516/apps/arweave/include/ar_pricing.hrl#L55-L66">[code5]</a>.
+
+    <br />
+    <strong>Endowment Pool</strong>
+    To ensure the reward is stable and sustainable, Arweave calculates rewards as follows: the rewards for miners are composed of the sum of <code>R_fees</code>,
+    <code>R_inflation</code>, and <code>R_endowment</code> <a href="https://www.arweave.org/yellow-paper.pdf">[yellow]</a>. <code>R_fees</code> refer to the total
+    transaction fees included in a block, but not all of these fees are immediately paid to miners. Instead, the majority is reserved in the endowment pool for future
+    <code>R_endowment</code> payments. <code>R_inflation</code> is a predetermined reward paid by the protocol, which decreases as the block height (the number of
+    generated blocks) increases. <code>R_endowment</code> is only paid from the endowment pool when the sum of the other two components falls below the storage cost.
 
     <br />
     <strong>Transaction Fee</strong>
-    In order to continue the incentive mechanism over 200 years (which is virtually permanent), the transaction fee for users is calculated as the perpetual storage cost.
-    To prevent the fee from diverging, Arweave assumes the cost of storage will decay consistently
+    In order to continue the incentive mechanism over 200 years (which is virtually permanent), the transaction fee imposed on users is calculated as the perpetual
+    storage cost. To prevent the fee from diverging to infinity, Arweave assumes the cost of storage will decay consistently
     <a href="https://github.com/ArweaveTeam/arweave/blob/694f4cc3731c1c5d04830d1e45896ed020b6a21d/apps/arweave/src/ar_pricing.erl#L240-L251">[code6]</a>.
 
     <br />

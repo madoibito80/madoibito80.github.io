@@ -2,15 +2,20 @@
 <html>
   <head>
     <title>Creating Extensions for Compiled Applications: Interacting with Memory Using Python and Windows API</title>
-    <link rel="stylesheet" href="../../cv/sakura.css" type="text/css" />
+    <link rel="stylesheet" href="../../cv/sakura.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" />
   </head>
   <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/file-highlight/prism-file-highlight.min.js"></script>
+
     <div style="text-align: center">
       <h2>Creating Extensions for Compiled Applications: Interacting with Memory Using Python and Windows API</h2>
       Rei Sato<br />Sep. 2024
     </div>
 
-    <h2>0. Introduction</h2>
+    <h2>1. Introduction</h2>
     This article introduces methods for using certain Windows API functions from Python, which are useful for creating extensions for applications running on Windows
     whose source code is not available. Windows API (also commonly known as Win32 API) is a collection of DLLs (Dynamic Link Libraries) that provide an interface for
     accessing Windows functionality. The diverse functionalities of the Windows API include connecting to a running application (process), reading from and writing to its
@@ -26,18 +31,24 @@
     implemented code operates as a 32-bit application within the WOW64 (Windows 32-bit on Windows 64-bit), and my code has been optimized accordingly. More precisely, the
     definitions of certain structures and the functions used differ when analyzing 64-bit applications. Python version is 3.12.6.
 
-    <h2>1. Reading Memory</h2>
+    <h2>2. Reading Memory</h2>
     The following script (<code>memory_reader.py</code>) defines functions to obtain the process ID or handle of a running process, enumerate the memory regions used by a
     process, and read specified memory regions.
-    <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=memory_reader.py"></script>
 
-    <h2>2. Enumerating Modules</h2>
+    <br />
+    <a href="memory_reader.py">[memory_reader.py]:</a>
+    <pre data-src="memory_reader.py"></pre>
+
+    <h2>3. Enumerating Modules</h2>
     The following script (<code>module_reader.py</code>) defines a function that enumerates the modules (e.g. .exe, .dll) loaded into memory by a process. It also
     provides example code that displays the memory regions occupied by each module. The memory address where a module is loaded may differ each time, but knowing the base
     address of a specific module enables the resolution of multi-level pointers, as described in the next section.
-    <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=module_reader.py"></script>
 
-    <h2>3. Resolving Multi-Level Pointers</h2>
+    <br />
+    <a href="module_reader.py">[module_reader.py]:</a>
+    <pre data-src="module_reader.py"></pre>
+
+    <h2>4. Resolving Multi-Level Pointers</h2>
     The following script (<code>pointer_chaser.py</code>) defines a function to resolve multi-level pointers. The purpose of this script is to access a specific variable
     within a process. Typically, due to ASLR (Address Space Layout Randomization) and dynamic memory allocation, the address of a variable is determined randomly. The
     simplest way to locate it is to identify a rule, such as "the variable exists at a certain offset from the base address of a specific module within the process."
@@ -46,7 +57,11 @@
     <br />
     The <code>get_address_by_pointer_offsets</code> function defines the logic to resolve a pointer chain by navigating through a series of pointer offsets. This function
     takes a module name and a series of offsets, resolving the final memory address by applying each offset sequentially.
-    <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=pointer_chaser.py"></script>
+
+    <br />
+    <a href="pointer_chaser.py">[pointer_chaser.py]:</a>
+    <pre data-src="pointer_chaser.py"></pre>
+
     As an example, the above function was used to identify the address where the memory stores the player's XYZ coordinates in a game. The specific values of the pointer
     chain were identified using Cheat Engine 7.5, and the steps for this operation were guided by this
     <a
@@ -54,12 +69,15 @@
       >blog</a
     >.
 
-    <h2>4. Writing Memory</h2>
+    <h2>5. Writing Memory</h2>
     The following script (<code>memory_writer.py</code>) defines a function that allows writing a specified value into memory. By using this function, you may be able to
     modify the behavior of a running application.
-    <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=memory_writer.py"></script>
 
-    <h2>5. Intercepting and Modifying Memory Access</h2>
+    <br />
+    <a href="memory_writer.py">[memory_writer.py]:</a>
+    <pre data-src="memory_writer.py"></pre>
+
+    <h2>6. Intercepting and Modifying Memory Access</h2>
     I have previously explained how to identify the memory address where a variable is stored and how to write a new value to that address. But what happens if the number
     of bytes in the new value is greater than in the old value? For example, when modifying a string, if the new value (<code>$str_new</code>) is longer than the old
     value (<code>$str_old</code>), and another variable is stored immediately after the end of <code>$str_old</code>, the memory area of that variable may be overwritten
@@ -72,7 +90,11 @@
     procedure, the monitored process is expected to correctly access both <code>$str_new</code> and the variable in <code>region_1</code>.
     <br />
     As a preparation for introducing the code to achieve this, the necessary constants are defined in the following script (<code>const.py</code>).
-    <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=const.py"></script>
+
+    <br />
+    <a href="const.py">[const.py]:</a>
+    <pre data-src="const.py"></pre>
+
     Next, I will explain the following script (<code>memory_interceptor.py</code>) which implements the idea described above.
     <br />
     <code>VirtualProtectEx</code> function sets access restrictions on memory pages containing the target address and catches <code>ACCESS_VIOLATION</code> exception when
@@ -90,7 +112,11 @@
     <br />
     <code>intercept_memory_access</code> function, which constitutes the loop mentioned above, automatically terminates after the timeout period from the initial memory
     modification. However, there is room for considering more efficient methods, such as terminating when a specific instruction is executed.
-    <script src="https://gist.github.com/madoibito80/c062b302b5d425a1c63e85f730a4cfb8.js?file=memory_interceptor.py"></script>
+
+    <br />
+    <a href="memory_interceptor.py">[memory_interceptor.py]:</a>
+    <pre data-src="memory_interceptor.py"></pre>
+
     <hr />
   </body>
 </html>

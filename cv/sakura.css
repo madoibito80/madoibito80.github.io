@@ -159,6 +159,7 @@ table {
 td, th {
   padding: 0.5em;
   border-bottom: 1px solid #f1f1f1;
+  text-align: left;
 }
 
 /* Buttons, forms and input */

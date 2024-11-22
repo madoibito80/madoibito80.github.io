@@ -91,21 +91,21 @@ mod tests {
             .forward(&x, 0)?
             .to_dtype(candle_core::DType::F32)?;
 
-        let y_first = y.flatten_all()?.get(0)?.to_scalar::<f32>()?;
         let y_shape = y.shape().dims();
+        let y_first = y.flatten_all()?.get(0)?.to_scalar::<f32>()?;
         let y_min = y.flatten_all()?.min(0)?.to_scalar::<f32>()?;
         let y_max = y.flatten_all()?.max(0)?.to_scalar::<f32>()?;
         let y_mean = y.flatten_all()?.mean(0)?.to_scalar::<f32>()?;
 
-        println!("First: {:?}", y_first);
         println!("Shape: {:?}", y_shape);
+        println!("First: {:?}", y_first);
         println!("Min: {:?}", y_min);
         println!("Max: {:?}", y_max);
         println!("Mean: {:?}", y_mean);
 
         let epsilon = 1e-6;
-        assert!((y_first - 0.489133).abs() < epsilon, "Mismatch in y_first");
         assert_eq!(y_shape, &[1, 10, 2048], "Mismatch in y_shape");
+        assert!((y_first - 0.489133).abs() < epsilon, "Mismatch in y_first");
         assert!((y_min - 0.378667).abs() < epsilon, "Mismatch in y_min");
         assert!((y_max - 0.635870).abs() < epsilon, "Mismatch in y_max");
         assert!((y_mean - 0.500260).abs() < epsilon, "Mismatch in y_mean");

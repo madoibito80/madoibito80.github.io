@@ -4,8 +4,8 @@ from transformers import AutoModelForCausalLM, LlamaConfig, PreTrainedTokenizerF
 
 def report(y, layer):
     print(f"Class: {type(layer)}")
-    print(f"First: {round(y.flatten()[0].item(), 6):.6f}")
     print(f"Shape: {list(y.shape)}")
+    print(f"First: {round(y.flatten()[0].item(), 6):.6f}")
     print(f"Min: {round(y.min().item(), 6):.6f}")
     print(f"Max: {round(y.max().item(), 6):.6f}")
     print(f"Mean: {round(y.mean().item(), 6):.6f}")

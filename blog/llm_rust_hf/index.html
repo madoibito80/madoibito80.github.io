@@ -13,9 +13,39 @@
       Rei Sato<br />Dec. 2024
     </div>
 
+    <h2>1. Introduction</h2>
+
+    <h2>2. Llama 3.2</h2>
+    <h3>2.1. Architecture</h3>
+    <h3>2.2. Safetensors</h3>
+    <h3>2.3. Tokenizer</h3>
+
+    <h2>3. Llama in Rust</h2>
+    To gain a deeper understanding of Llama, I implemented its inference code in Rust. However, this implementation has undergone limited testing and lacks optimization
+    techniques such as kv-cache or support for GPU-based inference and training. It was created primarily for personal learning purposes, and I encourage developers to
+    use more reliable and well-established implementations.
+    <br />
+    First, download the necessary files (<code>config.json</code>, <code>model.safetensors</code>, <code>tokenizer.json</code>) for running
+    <a href="https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct">Llama-3.2-1B-Instruct from Hugging Face Hub</a>. Next, use these files along with the Hugging Face
+    Transformers library to generate test cases in Python for verifying the correctness of the Rust implementation. In retrieve_llama.py, the output tensor from the first
+    Decoder Block, along with those from its internal MLP Layer and Attention Layer, is examined. Additionally, the model's output token sequence for the input sentence
+    "Who was the first president of the United States?" is observed.
+
     <br />
     <a href="retrieve_llama.py">[retrieve_llama.py]:</a>
     <pre data-src="retrieve_llama.py"></pre>
+
+    Here is a portion of the results obtained by running on Python 3.12.6 with transformers==4.45.0, torch==2.5.1, safetensors==0.4.5, and tokenizers==0.20.3. It can be
+    confirmed from the response to the question that the Llama 3.2 model possesses accurate historical knowledge.
+    <pre><code class="language-bash">...
+Class: &lt;class 'transformers.models.llama.modeling_llama.LlamaDecoderLayer'&gt;
+Shape: [1, 10, 2048]
+First: 0.489133
+Min: 0.378667
+Max: 0.635870
+Mean: 0.500260
+Tokens: [128000, 15546, 574, 279, 1176, 4872, 315, 279, 3723, 4273, 30, 10058, 6652, 198]
+Text: '&lt;|begin_of_text|&gt;Who was the first president of the United States? George Washington\n'</code></pre>
 
     <br />
     <a href="config.rs">[config.rs]:</a>

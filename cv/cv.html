@@ -24,13 +24,19 @@
         float: right;
       }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   </head>
   <body>
     <div style="text-align: center">
       <h2>Rei Sato - Curriculum Vitae</h2>
-      <img src="./Oct2023.jpg" width="30%" />
-      <img src="./May2024.jpg" width="50%" />
+      <img src="./Oct2023.jpg" style="vertical-align: middle; width: 250px" />
+      <img id="qrcode" style="vertical-align: middle" />
     </div>
+    <script>
+      QRCode.toDataURL(window.location.href, { width: 250 }, (_, url) => {
+        document.getElementById("qrcode").src = url;
+      });
+    </script>
 
     <hr />
 

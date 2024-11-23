@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rei Sato - Curriculum Vitae</title>
+    <link rel="stylesheet" href="./sakura.css" />
+    <style>
+      summary {
+        font-weight: bold;
+        font-size: 1.8rem;
+      }
+      details {
+        padding: 5px 15px;
+        margin: 15px 0px;
+        box-shadow: -1px 0 0 #222;
+        &[open] {
+          box-shadow: -3px 0 0 #222;
+        }
+      }
+      details details {
+        margin-left: 15px;
+      }
+      span.period {
+        font-weight: normal;
+        float: right;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  </head>
+  <body>
+    <div style="text-align: center">
+      <h2>Rei Sato - Curriculum Vitae</h2>
+      <img src="./Oct2023.jpg" style="vertical-align: middle; width: 250px" />
+      <img id="qrcode" style="vertical-align: middle" />
+    </div>
+    <script>
+      QRCode.toDataURL(window.location.href, { width: 250 }, (_, url) => {
+        document.getElementById("qrcode").src = url;
+      });
+    </script>
+
+    <hr />
+
+    <h3>Profile</h3>
+    <table>
+      <tr>
+        <td width="220px">Name</td>
+        <td>Rei Sato</td>
+      </tr>
+      <tr>
+        <td>Name (in Kanji)</td>
+        <td>佐藤 怜</td>
+      </tr>
+      <tr>
+        <td>Nickname</td>
+        <td>Ray</td>
+      </tr>
+      <tr>
+        <td>Born</td>
+        <td>Nov. 1997</td>
+      </tr>
+      <tr>
+        <td>Nationality</td>
+        <td>Japan</td>
+      </tr>
+      <tr>
+        <td>Language</td>
+        <td>Japanese (Native)<br />English</td>
+      </tr>
+      <tr>
+        <td>Contact</td>
+        <td><a href="https://www.linkedin.com/in/rei-sato-806b40282">LinkedIn</a></td>
+      </tr>
+    </table>
+
+    <h3>Work Experience</h3>
+    <table>
+      <tr>
+        <td width="220px">Oct. 2023 - Present</td>
+        <td>
+          <strong>LY Corporation</strong> (rebranded from LINE by merger)<br />Chiyoda City, Tokyo, Japan<br />Data Science Group, Division 5, Machine Learning Department
+          1
+        </td>
+      </tr>
+      <tr>
+        <td>Apr. 2022 - Sep. 2023</td>
+        <td><strong>LINE Corporation</strong><br />Shinjuku City, Tokyo, Japan<br />Data Science Center, Machine Learning Solution Department</td>
+      </tr>
+    </table>
+
+    <h3>Education</h3>
+    <table>
+      <tr>
+        <td width="220px"><strong>Master of Engineering</strong><br />Apr. 2020 - Mar. 2022</td>
+        <td>
+          <strong>University of Tsukuba</strong><br />Tsukuba City, Ibaraki, Japan<br />Degree Programs in Systems and Information Engineering, Master's Program in
+          Computer Science<br />
+          <details>
+            <summary>in ja</summary>
+            筑波大学 大学院理工情報生命学術院 システム情報工学研究群 情報理工学位プログラム<br />修士(工学)
+          </details>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Bachelor of Information Engineering</strong><br />Apr. 2016 - Mar. 2020</td>
+        <td>
+          <strong>University of Tsukuba</strong><br />Tsukuba City, Ibaraki, Japan<br />College of Information Science, Machine Intelligence and Media Technologies
+          Major<br />
+          <details>
+            <summary>in ja</summary>
+            筑波大学 情報学群 情報科学類 知能情報メディア主専攻<br />学士(情報工学)
+          </details>
+        </td>
+      </tr>
+    </table>
+
+    <h3>Highlights</h3>
+    ### HIGHLIGHTS ###
+
+    <hr />
+    <h3>Blog Posts</h3>
+    <table>
+      <tr>
+        <td width="110px">Oct. 2024</td>
+        <td><a href="../blog/crypto_storage_website/index.html">Storing Data Permanently, as a Website: A Review of Arweave and AR.IO</a></td>
+      </tr>
+      <tr>
+        <td>Sep. 2024</td>
+        <td><a href="../blog/py_winapi_mod/index.html">Creating Extensions for Compiled Applications: Interacting with Memory Using Python and Windows API</a></td>
+      </tr>
+      <tr>
+        <td>Jan. 2024</td>
+        <td><a href="https://speakerdeck.com/reisato12345/neurips2023-paper-reading-pgdiff">NeurIPS2023 paper reading lightning talk (PGDiff)</a></td>
+      </tr>
+      <tr>
+        <td>Feb. 2023</td>
+        <td><a href="https://speakerdeck.com/reisato12345/neurips2022-face-image-synthesis-series">NeurIPS2022 Face Image Synthesis Series</a></td>
+      </tr>
+      <tr>
+        <td>Jan. 2023</td>
+        <td><a href="https://engineering.linecorp.com/ja/blog/NeurIPS-2022-report">NeurIPS2022参加報告</a></td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -22,7 +22,7 @@ for section in hl:
     for lang in section["ref"].keys():
         html += f'<details{" open" if lang == "en" else ""}><summary>References in {lang}</summary><ol>'
         for ref in section["ref"][lang]:
-            html += f'<li>{ref}</li>'
+            html += f'<li>{ref.replace("佐藤怜", "<u>佐藤怜</u>").replace("Rei Sato", "<u>Rei Sato</u>")}</li>'
         html += '</ol></details>'
     html += '</details>'
 

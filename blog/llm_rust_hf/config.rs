@@ -1,4 +1,4 @@
-// Sourced from: https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct/blob/c4219cc9e642e492fd0219283fa3c674804bb8ed/config.json
+// Sourced from https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct/blob/c4219cc9e642e492fd0219283fa3c674804bb8ed/config.json
 pub const DEVICE: candle_core::Device = candle_core::Device::Cpu;
 pub const HEAD_DIM: usize = 64;
 pub const HIDDEN_SIZE: usize = 2048;

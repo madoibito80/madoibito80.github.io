@@ -22,22 +22,28 @@
     end of the input token sequence in an auto-regressive manner. A token is an ID corresponding to a string, which is converted into dense features in the initial
     embedding layer of the Transformer.
 
-    <h3>2.1. Tokenizer</h3>
+    <br />
+    <strong>Tokenizer</strong>
     Llama 3.2 utilizes Hugging Face Tokenizers, which is implemented in Rust. Let's take a look at the chain of references from an abstracted Python class to the Rust
     implementation.
     <br />
     The pre-trained Llama 3.2 model is available on the Hugging Face Hub and includes tokenizer-related files. In particular, tokenizer_config.json is a file that stores
     the tokenizer settings used by the Hugging Face Transformers library, and
-    <code>PreTrainedTokenizerFast</code> is specified as the tokenizer for Llama 3.2 (<a
+    <code>PreTrainedTokenizerFast</code> is specified as the tokenizer for Llama 3.2 [<a
       href="https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct/blob/0907763fe3a4b2e195d576cbc0144e38cdabdce5/tokenizer_config.json#L2061"
-      >ref.</a
-    >). When transformers.PreTrainedTokenizerFast is instantiated, a TokenizerFast class is created, but in reality, its underlying implementation is tokenizers.Tokenizer
-    class. The Tokenizer class in the tokenizer library for Python is implemented in Rust and published as a binding for Python (<a
+      >code</a
+    >]. When transformers.PreTrainedTokenizerFast is instantiated, a TokenizerFast class is created, but in reality, its underlying implementation is tokenizers.Tokenizer
+    class. The Tokenizer class in the tokenizer library for Python is implemented in Rust and published as a binding for Python [<a
       href="https://github.com/huggingface/tokenizers/blob/v0.20.3/bindings/python/src/tokenizer.rs#L465"
-      >ref.</a
-    >).
+      >code</a
+    >].
 
-    <h3>2.2. Safetensors</h3>
+    <br />
+    <strong>Safetensors</strong>
+    Safetensors is a file format proposed by Hugging Face for storing neural network weight parameters. In Python, reading and writing are handled using Hugging Face's
+    safetensors library, which is also implemented in Rust. The chain of references from Python's transformers library to safetensors, which is implemented in Rust, is as
+    follows: When transformers.AutoModelForCausalLM.from_pretrained is executed, in the case of Llama, it calls transformers.modeling_utils.load_state_dict. This function
+    internally executes modeling_utils.safe_load_file, which, in turn, calls safetensors.torch.load_file.
 
     <h2>3. Llama in Rust</h2>
     To gain a deeper understanding of Llama, I implemented its inference code in Rust. This implementation has undergone limited testing and does not include optimization

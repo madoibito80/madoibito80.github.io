@@ -1,10 +1,13 @@
 import yaml
 import json
+import shutil
+
+shutil.copy("./highlights.yaml", "./_highlights.yaml")
 
 with open("./highlights.yaml", "r", encoding="utf-8") as f:
     hl = yaml.safe_load(f)
 
-with open("./_highlights.yaml", "w", encoding="utf-8") as f:
+with open("./highlights.yaml", "w", encoding="utf-8") as f:
     yaml.safe_dump(hl, f, allow_unicode=True)
 
 print(json.dumps(hl, indent=4))

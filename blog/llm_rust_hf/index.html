@@ -14,26 +14,25 @@
     </div>
 
     <h2>1. Introduction</h2>
+    This document provides explanations and implementations aimed at deepening the understanding of how conversational LLMs operate.
 
     <h2>2. Llama 3.2</h2>
     Llama is one of the most widely used generative language models, developed and released by Meta. This section provides an overview of how Llama operates, though many
-    aspects are common to other large language models (LLMs) as well. Llama adopts a decoder-only Transformer architecture, where it takes a token sequence converted from
-    an input string and predicts the subsequent tokens. It can also predict multiple tokens consecutively. In such cases, previously generated tokens are appended to the
-    end of the input token sequence in an auto-regressive manner. A token is an ID corresponding to a string, which is converted into dense features in the initial
-    embedding layer of the Transformer.
+    aspects are common to other large language models (LLMs) as well.
+    <br />Llama adopts a decoder-only Transformer architecture, where it takes a token sequence converted from an input string and predicts the subsequent tokens. It can
+    also predict multiple tokens consecutively. In such cases, previously generated tokens are appended to the end of the input token sequence in an auto-regressive
+    manner. A token is an ID corresponding to a string, which is converted into dense features in the initial embedding layer of the Transformer.
 
     <br />
     <strong>Tokenizer</strong>
     Llama 3.2 utilizes Hugging Face Tokenizers, which is implemented in Rust. Let's take a look at the chain of references from an abstracted Python class to the Rust
     implementation.
     <br />
-    The pre-trained Llama 3.2 model is available on the Hugging Face Hub and includes tokenizer-related files. In particular, tokenizer_config.json is a file that stores
-    the tokenizer settings used by the Hugging Face Transformers library, and
-    <code>PreTrainedTokenizerFast</code> is specified as the tokenizer for Llama 3.2 [<a
-      href="https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct/blob/0907763fe3a4b2e195d576cbc0144e38cdabdce5/tokenizer_config.json#L2061"
-      >code</a
-    >]. When transformers.PreTrainedTokenizerFast is instantiated, a TokenizerFast class is created, but in reality, its underlying implementation is tokenizers.Tokenizer
-    class. The Tokenizer class in the tokenizer library for Python is implemented in Rust and published as a binding for Python [<a
+    The pre-trained Llama 3.2 model is available on the Hugging Face Hub and includes tokenizer-related files. In particular, <code>tokenizer_config.json</code> is a file
+    that stores the tokenizer settings used by the Hugging Face Transformers library, and <code>PreTrainedTokenizerFast</code> is specified as the tokenizer for Llama 3.2
+    [<a href="https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct/blob/0907763fe3a4b2e195d576cbc0144e38cdabdce5/tokenizer_config.json#L2061">code</a>]. When
+    transformers.PreTrainedTokenizerFast is instantiated, a TokenizerFast class is created, but in reality, its underlying implementation is tokenizers.Tokenizer class.
+    The Tokenizer class in the tokenizer library for Python is implemented in Rust and published as a binding for Python [<a
       href="https://github.com/huggingface/tokenizers/blob/v0.20.3/bindings/python/src/tokenizer.rs#L465"
       >code</a
     >].

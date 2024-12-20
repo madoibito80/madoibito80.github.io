@@ -9,7 +9,7 @@
       }
       body {
         font-size: clamp(1.2rem, calc(1rem + 0.625vw), 1.7rem);
-        max-width: 45em;
+        max-width: 85rem;
         margin: auto;
       }
       summary {
@@ -36,6 +36,9 @@
       hr {
         border-color: #222;
       }
+      td.left {
+        width: 25rem;
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   </head>
@@ -56,7 +59,7 @@
     <h3>Profile</h3>
     <table>
       <tr>
-        <td width="220px">Name</td>
+        <td class="left">Name</td>
         <td>Rei Sato</td>
       </tr>
       <tr>
@@ -88,7 +91,7 @@
     <h3>Work Experience</h3>
     <table>
       <tr>
-        <td width="220px"><strong>Machine Learning Engineer</strong><br />Oct. 2023 - Present</td>
+        <td class="left"><strong>Machine Learning Engineer</strong><br />Oct. 2023 - Present</td>
         <td>
           <strong>LY Corporation</strong> (rebranded from LINE by merger)<br />Chiyoda City, Tokyo, Japan<br />Data Science Group, Division 5, Machine Learning Department
           1
@@ -103,7 +106,7 @@
     <h3>Education</h3>
     <table>
       <tr>
-        <td width="220px"><strong>Master of Engineering</strong><br />Apr. 2020 - Mar. 2022</td>
+        <td class="left"><strong>Master of Engineering</strong><br />Apr. 2020 - Mar. 2022</td>
         <td>
           <strong>University of Tsukuba</strong><br />Tsukuba City, Ibaraki, Japan<br />Degree Programs in Systems and Information Engineering, Master's Program in
           Computer Science<br />

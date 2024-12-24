@@ -84,9 +84,9 @@
       a method that converges with fewer updates while minimizing GPU memory usage.
       This research, which I conducted as the first author, received the JSAI Annual
       Conference Student Incentive Award in Jul. 2019 and was accepted at AAAI with
-      an acceptance rate of 21.4% (1692 out of 7911). Additionally, I contributed to research
-      on automatic termination for NAS, which exploits an upper bound on the decay
-      of generalization error to determine when to stop the search process.
+      an acceptance rate of 21.4% (1692 out of 7911). Additionally, I contributed
+      to research on automatic termination for NAS, which exploits an upper bound
+      on the decay of generalization error to determine when to stop the search process.
 - emph: false
   header: As a Graduate Student
   period: Apr. 2020 - Mar. 2022
@@ -103,7 +103,7 @@
     en: I contributed to research on constrained black-box optimization leveraging
       deep generative models, and a co-authored paper was accepted by IEEE Access.
       The Dean Award for Academic Excellence was awarded by University of Tsukuba
-      in Mar. 2022 for outstanding research.
+      in Mar. 2022.
 - emph: false
   header: As an Undergraduate Student
   period: Apr. 2016 - Mar. 2020

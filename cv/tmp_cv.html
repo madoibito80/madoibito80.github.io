@@ -42,15 +42,37 @@
       hr {
         border-color: #222;
       }
+      div.container {
+        display: grid;
+        grid-template-columns: 1.2fr 2fr;
+        grid-template-rows: 40rem;
+      }
+      div.right {
+        display: grid;
+        grid-template-rows: 1fr 3fr 2fr;
+      }
+      .item {
+        display: flex;
+        padding: 1rem;
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   </head>
   <body>
-    <div style="text-align: center">
-      <h2>Rei Sato - Curriculum Vitae</h2>
-      <img src="./Oct2023.jpg" style="vertical-align: middle; width: 250px" />
-      <img id="qrcode" style="vertical-align: middle" />
+    <div class="container">
+      <div class="item"><img src="Oct2023.jpg" style="max-width: 100%; max-height: 100%; object-fit: contain" /></div>
+      <div class="right">
+        <div class="item">
+          <h1>Rei Sato</h1>
+        </div>
+        <div class="item">
+          I am a Machine Learning Engineer based in Tokyo, Japan, specializing in ETL pipelines for feature engineering, user profile estimation, and related tasks. My
+          academic interests include large language models (LLMs) and reinforcement learning (RL). I am open to international job opportunities.
+        </div>
+        <div class="item" style="align-items: center"><img id="qrcode" style="width: 10rem; height: auto; object-fit: contain" />QR code for this page</div>
+      </div>
     </div>
+
     <script>
       QRCode.toDataURL(window.location.href, { width: 250 }, (_, url) => {
         document.getElementById("qrcode").src = url;

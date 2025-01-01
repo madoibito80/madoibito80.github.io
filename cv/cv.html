@@ -28,16 +28,16 @@
         font-weight: normal;
         float: right;
       }
-      table {
-        width: 100%;
-      }
       td,
       th {
         padding: 0.5em;
         border-bottom: 1px solid #f1f1f1;
         text-align: left;
       }
-      td.left {
+      table.profile {
+        width: 100%;
+      }
+      table.profile td:first-child {
         width: 25rem;
       }
       hr {
@@ -54,6 +54,10 @@
       div.right {
         flex: 2;
         padding: 0 3rem;
+      }
+      p {
+        text-indent: 1rem;
+        margin: 0;
       }
     </style>
   </head>
@@ -81,9 +85,9 @@
     <hr />
 
     <h2>Profile</h2>
-    <table>
+    <table class="profile">
       <tr>
-        <td class="left">Name</td>
+        <td>Name</td>
         <td>Rei Sato</td>
       </tr>
       <tr>
@@ -113,9 +117,9 @@
     </table>
 
     <h2>Work Experience</h2>
-    <table>
+    <table class="profile">
       <tr>
-        <td class="left"><strong>Machine Learning Engineer</strong><br />Oct. 2023 - Present</td>
+        <td><strong>Machine Learning Engineer</strong><br />Oct. 2023 - Present</td>
         <td>
           <strong>LY Corporation</strong> (rebranded from LINE by merger)<br />Chiyoda City, Tokyo, Japan<br />Data Science Group, Division 5, Machine Learning Department
           1
@@ -128,9 +132,9 @@
     </table>
 
     <h2>Education</h2>
-    <table>
+    <table class="profile">
       <tr>
-        <td class="left"><strong>Master of Engineering</strong><br />Apr. 2020 - Mar. 2022</td>
+        <td><strong>Master of Engineering</strong><br />Apr. 2020 - Mar. 2022</td>
         <td>
           <strong>University of Tsukuba</strong><br />Tsukuba City, Ibaraki, Japan<br />Degree Programs in Systems and Information Engineering, Master's Program in
           Computer Science<br />
@@ -220,12 +224,20 @@
     </details>
     <details>
       <summary>Research on Neural Architecture Search<span class="period">Apr. 2018 - 2022</span></summary>
-      Neural Architecture Search (NAS) algorithmically optimizes the architecture of deep neural networks, as the structure of a computational graph significantly impacts
-      the performance of a trained model. One of the main approaches in NAS is gradient-based NAS, which defines differentiable architectures to simultaneously optimize
-      both the architecture and weight parameters via gradient descent. We focused on the time and memory requirements of gradient-based NAS, proposing a method that
-      converges with fewer updates while minimizing GPU memory usage. This research, which I conducted as the first author, received the JSAI Annual Conference Student
-      Incentive Award in Jul. 2019 and was accepted at AAAI with an acceptance rate of 21.4% (1692 out of 7911). Additionally, I contributed to research on automatic
-      termination for NAS, which exploits an upper bound on the decay of generalization error to determine when to stop the search process.
+      <p>
+        Neural Architecture Search (NAS) algorithmically optimizes the architecture of deep neural networks, as the structure of a computational graph significantly
+        impacts the performance of a trained model. One of the main approaches in NAS is gradient-based NAS, which defines differentiable architectures to simultaneously
+        optimize both the architecture and weight parameters via gradient descent.
+      </p>
+      <p>
+        We focused on the time and memory requirements of gradient-based NAS, proposing a method that converges with fewer updates while minimizing GPU memory usage. This
+        research, which I conducted as the first author, received the JSAI Annual Conference Student Incentive Award in Jul. 2019 and was accepted at AAAI with an
+        acceptance rate of 21.4% (1692 out of 7911).
+      </p>
+      <p>
+        I contributed to research on automatic termination for gradient-based NAS, which exploits an upper bound on the decay of generalization error to determine when to
+        stop the search process.
+      </p>
       <details open>
         <summary>References in en</summary>
         <ol>
@@ -262,8 +274,8 @@
     </details>
     <details>
       <summary>As a Graduate Student<span class="period">Apr. 2020 - Mar. 2022</span></summary>
-      I contributed to research on constrained black-box optimization leveraging deep generative models, and a co-authored paper was accepted by IEEE Access. The Dean
-      Award for Academic Excellence was awarded by University of Tsukuba in Mar. 2022.
+      <p>I contributed to research on constrained black-box optimization leveraging deep generative models, and a co-authored paper was accepted by IEEE Access.</p>
+      <p>The Dean Award for Academic Excellence was awarded by University of Tsukuba in Mar. 2022.</p>
       <details open>
         <summary>References in en</summary>
         <ol>
@@ -285,8 +297,8 @@
     </details>
     <details>
       <summary>As an Undergraduate Student<span class="period">Apr. 2016 - Mar. 2020</span></summary>
-      I published a blog post summarizing 80 papers on Model Compression, a field that aims to accelerate inference and reduce parameters in deep neural networks. I
-      received the Dean's Award from University of Tsukuba in Mar. 2020 for excellence in academic research.
+      <p>I published a blog post summarizing 80 papers on Model Compression, a field that aims to accelerate inference and reduce parameters in deep neural networks.</p>
+      <p>I received the Dean's Award from University of Tsukuba in Mar. 2020 for excellence in academic research.</p>
       <details>
         <summary>References in ja</summary>
         <ol>
@@ -297,9 +309,14 @@
     </details>
     <details>
       <summary>As a High School Student<span class="period">Apr. 2013 - Mar. 2016</span></summary>
-      I passed national certification exams for NSPC 3rd Grade Certified Skilled Worker of Web Design in Jun. 2013 and for IPA Information Security Specialist in Dec.
-      2013. I was awarded the Grand Prize and three other awards at Ritsumeikan University's National High School Software Contest in Nov. 2014 for presenting OCR
-      software. I was selected as a participant in National Security Camp, which I attended in Aug. 2015.
+      <p>
+        I passed national certification exams for NSPC 3rd Grade Certified Skilled Worker of Web Design in Jun. 2013 and for IPA Information Security Specialist in Dec.
+        2013.
+      </p>
+      <p>
+        I was awarded the Grand Prize and three other awards at Ritsumeikan University's National High School Software Contest in Nov. 2014 for presenting OCR software.
+      </p>
+      <p>I was selected as a participant in National Security Camp, which I attended in Aug. 2015.</p>
       <details>
         <summary>References in ja</summary>
         <ol>

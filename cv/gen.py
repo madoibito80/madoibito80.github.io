@@ -23,7 +23,12 @@ for section in hl:
         html += '<details>'
     
     html += f'<summary>{section["header"]}<span class="period">{section["period"]}</span></summary>'
-    html += f'{section["text"]["en"]}'
+
+    if isinstance(section["text"]["en"], list):
+        for sent in section["text"]["en"]:
+            html += f'<p>{sent}</p>'
+    else:
+        html += f'{section["text"]["en"]}'
 
     for lang in section["ref"].keys():
         html += f'<details{" open" if lang == "en" else ""}><summary>References in {lang}</summary><ol>'

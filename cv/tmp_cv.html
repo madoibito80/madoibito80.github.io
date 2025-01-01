@@ -28,16 +28,16 @@
         font-weight: normal;
         float: right;
       }
-      table {
-        width: 100%;
-      }
       td,
       th {
         padding: 0.5em;
         border-bottom: 1px solid #f1f1f1;
         text-align: left;
       }
-      td.left {
+      table.profile {
+        width: 100%;
+      }
+      table.profile td:first-child {
         width: 25rem;
       }
       hr {
@@ -54,6 +54,10 @@
       div.right {
         flex: 2;
         padding: 0 3rem;
+      }
+      p {
+        text-indent: 1rem;
+        margin: 0;
       }
     </style>
   </head>
@@ -81,9 +85,9 @@
     <hr />
 
     <h2>Profile</h2>
-    <table>
+    <table class="profile">
       <tr>
-        <td class="left">Name</td>
+        <td>Name</td>
         <td>Rei Sato</td>
       </tr>
       <tr>
@@ -113,9 +117,9 @@
     </table>
 
     <h2>Work Experience</h2>
-    <table>
+    <table class="profile">
       <tr>
-        <td class="left"><strong>Machine Learning Engineer</strong><br />Oct. 2023 - Present</td>
+        <td><strong>Machine Learning Engineer</strong><br />Oct. 2023 - Present</td>
         <td>
           <strong>LY Corporation</strong> (rebranded from LINE by merger)<br />Chiyoda City, Tokyo, Japan<br />Data Science Group, Division 5, Machine Learning Department
           1
@@ -128,9 +132,9 @@
     </table>
 
     <h2>Education</h2>
-    <table>
+    <table class="profile">
       <tr>
-        <td class="left"><strong>Master of Engineering</strong><br />Apr. 2020 - Mar. 2022</td>
+        <td><strong>Master of Engineering</strong><br />Apr. 2020 - Mar. 2022</td>
         <td>
           <strong>University of Tsukuba</strong><br />Tsukuba City, Ibaraki, Japan<br />Degree Programs in Systems and Information Engineering, Master's Program in
           Computer Science<br />

@@ -81,11 +81,10 @@
         impacts the performance of a trained model. One of the main approaches in NAS
         is gradient-based NAS, which defines differentiable architectures to simultaneously
         optimize both the architecture and weight parameters via gradient descent.
-      - We focused on the time and memory requirements of gradient-based NAS, proposing
-        a method that converges with fewer updates while minimizing GPU memory usage.
-        This research, which I conducted as the first author, received the JSAI Annual
-        Conference Student Incentive Award in Jul. 2019 and was accepted at AAAI with
-        an acceptance rate of 21.4% (1692 out of 7911).
+      - My first-authored paper on gradient-based NAS, which proposes a method that
+        converges with fewer updates while minimizing GPU memory usage, received the
+        JSAI Annual Conference Student Incentive Award in Jul. 2019 and was accepted
+        at AAAI with an acceptance rate of 21.4% (1692 out of 7911).
       - I contributed to research on automatic termination for gradient-based NAS, which
         exploits an upper bound on the decay of generalization error to determine when
         to stop the search process.
@@ -131,7 +130,8 @@
   text:
     en:
       - I passed national certification exams for NSPC 3rd Grade Certified Skilled Worker
-        of Web Design in Jun. 2013 and for IPA Information Security Specialist in Dec. 2013.
+        of Web Design in Jun. 2013 and for IPA Information Security Specialist in Dec.
+        2013.
       - I was awarded the Grand Prize and three other awards at Ritsumeikan University's
         National High School Software Contest in Nov. 2014 for presenting OCR software.
       - I was selected as a participant in National Security Camp, which I attended

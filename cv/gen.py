@@ -25,8 +25,10 @@ for section in hl:
     html += f'<summary>{section["header"]}<span class="period">{section["period"]}</span></summary>'
 
     if isinstance(section["text"]["en"], list):
+        html += '<ul>'
         for sent in section["text"]["en"]:
-            html += f'<p>{sent}</p>'
+            html += f'<li>{sent}</li>'
+        html += '</ul>'
     else:
         html += f'{section["text"]["en"]}'
 

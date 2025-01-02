@@ -77,17 +77,16 @@
   text:
     en:
       - Neural Architecture Search (NAS) algorithmically optimizes the architecture
-        of deep neural networks, as the structure of a computational graph significantly
-        impacts the performance of a trained model. One of the main approaches in NAS
-        is gradient-based NAS, which defines differentiable architectures to simultaneously
-        optimize both the architecture and weight parameters via gradient descent.
+        of deep neural networks, and gradient-based NAS defines differentiable architectures
+        to simultaneously optimize both the architecture and weight parameters via gradient
+        descent.
       - My first-authored paper on gradient-based NAS, which proposes a method that
         converges with fewer updates while minimizing GPU memory usage, received the
         JSAI Annual Conference Student Incentive Award in Jul. 2019 and was accepted
         at AAAI with an acceptance rate of 21.4% (1692 out of 7911).
-      - I contributed to research on automatic termination for gradient-based NAS, which
-        exploits an upper bound on the decay of generalization error to determine when
-        to stop the search process.
+      - Contributed to research on automatic termination for gradient-based NAS by exploiting
+        an upper bound on the decay of generalization error to determine when to stop
+        the search process.
 - emph: false
   header: As a Graduate Student
   period: Apr. 2020 - Mar. 2022
@@ -129,7 +128,8 @@
         Nov. 2014
   text:
     en:
-      - Passed national certification exams for NSPC 3rd grade Certified Skilled Worker of Web Design in Jun. 2013 and for IPA Information Security Specialist in Dec.
+      - Passed national certification exams for NSPC 3rd grade Certified Skilled Worker
+        of Web Design in Jun. 2013 and for IPA Information Security Specialist in Dec.
         2013.
       - The Grand Prize and three other awards were awarded for presenting OCR software
         at Ritsumeikan University's National High School Software Contest in Nov. 2014.

@@ -5,7 +5,6 @@ import json
 from openai import OpenAI
 import random
 
-MAPPING_PATH = "./map.json"
 OUTPUT_PATH = "./eng.json"
 
 with open("./openai_secret.yaml", "r") as f:

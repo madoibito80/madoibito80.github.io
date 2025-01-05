@@ -43,9 +43,10 @@ def query():
 
 
 def parse(x):
-    r = {}
-    x = x.split("\n")
     score_map = {0: 1, 1: 0, 2: 0.5}
+    r = {}
+
+    x = x.split("\n")
     if len(x) != 3:
         return None
     for i in range(3):

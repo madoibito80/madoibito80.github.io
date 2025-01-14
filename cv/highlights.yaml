@@ -15,18 +15,20 @@
   period: Apr. 2022 - Present
   ref: {}
   text:
-    en: "LINE is one of the most widely used messenger apps in Japan, with approximately
-      100 million users accessing diverse content through the platform. (1) I was
-      responsible for designing and operating a pipeline to process and store user
-      interaction histories as features to deliver more relevant content to users.
-      (2) Additionally, I contributed to developing machine learning models to predict
-      user attributes (such as age and gender) for personalized advertising by utilizing
-      these features. (3) Furthermore, I worked on improving the sticker suggestion
-      feature used during message composition (suggesting stickers matching user input
-      text). This involved creating an annotation tool, defining metrics for evaluating
-      the suggestion feature, and building a pipeline to calculate these metrics from
-      actual user logs. The following technologies were utilized in these projects:
-      Python, Apache Spark, Apache Airflow, Git, Docker, and Streamlit."
+    en:
+      - LINE is one of the most widely used messenger apps in Japan, with approximately
+        100 million users accessing diverse content through the platform.
+      - Was responsible for designing and operating a pipeline to process and store
+        user interaction histories as features to deliver more relevant content to users.
+      - Contributed to developing machine learning models to predict user attributes
+        (such as age and gender) for personalized advertising by utilizing the above
+        features.
+      - Worked on improving the sticker suggestion feature used during message composition
+        (suggesting stickers matching user input text). This involved creating an annotation
+        tool, defining metrics for evaluating the suggestion feature, and building a
+        pipeline to calculate these metrics from actual user logs.
+      - "The following technologies were utilized in these projects: Python, Apache
+        Spark, Apache Airflow, Git, Docker, and Streamlit."
 - emph: true
   header: Research on Sim-to-Real in Reinforcement Learning
   period: Apr. 2019 - Present
@@ -45,18 +47,15 @@
       - 田邊拓実, 佐藤怜, 福地一斗, 佐久間淳, 秋本洋平. モデル化誤差に頑健な Max-Min Off-Policy Actor-Critic. 人工知能学会全国大会,
         2022. [<a href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2022/0/JSAI2022_2C5GS203/_article/-char/ja">J-STAGE</a>]
   text:
-    en: Reinforcement learning is advancing in applications such as robot control,
-      but training robots to interact in the real world can be costly and risky. A
-      solution is to operate agents in the real world that were pre-trained in simulators,
-      but accurate simulators are not always available. Especially for vision-based
-      agents that receive camera images as state observations, it is generally difficult
-      to equip simulators with high-precision renderers. The problem of bridging the
-      gap between simulators and the real world in reinforcement learning is studied
-      in the field known as Sim-to-Real. We propose a method for effectively utilizing
-      agents pre-trained in simulators in the real world, even under challenging conditions
-      with only low-precision renderers, or sometimes even without any renderers at
-      all. The paper on this study was accepted at the IJCNN, with an acceptance rate
-      of 55.4% (~ 1467/2646 for IEEE WCCI).
+    en:
+      - A common approach to applying reinforcement learning in real-world applications
+        is to pretrain agents using simulators or offline datasets, as training them
+        while interacting with the real world can be both costly and risky. However,
+        since pre-trained agents may still fail in real-world operations, a method to
+        bridge the gap between safe pre-training and actual deployment is necessary.
+      - Led research proposing a method for pretraining vision-based agents in simulators
+        without requiring a renderer; the paper was accepted at IJCNN with an acceptance
+        rate of 55.4% (1467 out of 2646 for IEEE WCCI).
 - emph: false
   header: Research on Neural Architecture Search
   period: Apr. 2018 - 2022
@@ -80,10 +79,10 @@
         of deep neural networks, and gradient-based NAS defines differentiable architectures
         to simultaneously optimize both the architecture and weight parameters via gradient
         descent.
-      - My first-authored paper on gradient-based NAS, which proposes a method that
-        converges with fewer updates while minimizing GPU memory usage, received the
-        JSAI Annual Conference Student Incentive Award in Jul. 2019 and was accepted
-        at AAAI with an acceptance rate of 21.4% (1692 out of 7911).
+      - Led research on gradient-based NAS, proposing a method that converges with fewer
+        updates while minimizing GPU memory usage; received the JSAI Annual Conference
+        Student Incentive Award in Jul. 2019 and was accepted at AAAI with an acceptance
+        rate of 21.4% (1692 out of 7911).
       - Contributed to research on automatic termination for gradient-based NAS by exploiting
         an upper bound on the decay of generalization error to determine when to stop
         the search process.

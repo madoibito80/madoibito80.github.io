@@ -2,7 +2,7 @@ import yaml
 import shutil
 
 def prepare(path):
-    shutil.copy(path, f'_{path}')
+    #shutil.copy(path, f'_{path}')
 
     with open(path, "r", encoding="utf-8") as f:
         ls = yaml.safe_load(f)

@@ -27,6 +27,7 @@ def profile():
             html += f'<h2>{header}</h2><table class="profile">'
             for v in vs:
                 for k, v in v.items():
+                    v = v.replace("#JP#", '<span class="fi fi-jp fi-bordered"></span>')
                     html += f'<tr><td>{k}</td><td>{v}</td></tr>'
             html += '</table>'
     return html

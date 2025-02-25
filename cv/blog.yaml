@@ -1,0 +1,21 @@
+en:
+  - date: Oct. 2024
+    link: '<a href="../blog/crypto_storage_website/index.html">Storing Data Permanently,
+      as a Website: A Review of Arweave and AR.IO</a>'
+  - date: Sep. 2024
+    link: '<a href="../blog/py_winapi_mod/index.html">Creating Extensions for Compiled
+      Applications: Interacting with Memory Using Python and Windows API</a>'
+ja:
+  - date: Jan. 2025
+    link: <a href="https://techblog.lycorp.co.jp/ja/20250129b">NeurIPS 2024 参加レポート：LLMの安全性を向上させる手法を発表しました</a>
+  - date: Jan. 2025
+    link: <a href="https://speakerdeck.com/reisato12345/neurips-2024-can-jia-bao-gao-and-lun-wen-shao-jie-sacpo-ctrl-g">NeurIPS
+      2024 参加報告 & 論文紹介 (SACPO, Ctrl-G)</a>
+  - date: Jan. 2024
+    link: <a href="https://speakerdeck.com/reisato12345/neurips2023-paper-reading-pgdiff">NeurIPS2023
+      paper reading lightning talk (PGDiff)</a>
+  - date: Feb. 2023
+    link: <a href="https://speakerdeck.com/reisato12345/neurips2022-face-image-synthesis-series">NeurIPS2022
+      Face Image Synthesis Series</a>
+  - date: Jan. 2023
+    link: <a href="https://engineering.linecorp.com/ja/blog/NeurIPS-2022-report">NeurIPS2022参加報告</a>

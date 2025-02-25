@@ -7,8 +7,8 @@ def prepare(path):
     with open(path, "r", encoding="utf-8") as f:
         ls = yaml.safe_load(f)
     
-    with open(path, "w", encoding="utf-8") as f:
-        yaml.safe_dump(ls, f, allow_unicode=True)
+    #with open(path, "w", encoding="utf-8") as f:
+    #    yaml.safe_dump(ls, f, allow_unicode=True)
 
     return ls
 
@@ -17,6 +17,7 @@ with open("./tmp_cv.html", "r", encoding="utf-8") as f:
 
 hl = prepare("highlights.yaml")
 ps = prepare("profile.yaml")
+bs = prepare("blog.yaml")
 
 
 def profile():
@@ -27,11 +28,22 @@ def profile():
             html += f'<h2>{header}</h2><table class="profile">'
             for v in vs:
                 for k, v in v.items():
-                    v = v.replace("{JP}", '<span class="fi fi-jp fi-bordered"></span>')
+                    v = v.replace("${JP}", '<span class="fi fi-jp fi-bordered"></span>')
                     html += f'<tr><td>{k}</td><td>{v}</td></tr>'
             html += '</table>'
     return html
 
+def blog(bs):
+    html = ''
+    for lang in ["en", "ja"]:
+        if lang == "ja":
+            html += '<details><summary>in ja</summary>'
+        html += '<table class="blog">'
+        for blog in bs[lang]:
+            html += f'<tr><td>{blog["date"]}</td><td>{blog["link"]}</td></tr>'
+        html += '</table>'
+    html += '</details>'
+    return html
 
 def highlights():
     html = ""
@@ -42,7 +54,7 @@ def highlights():
         else:
             html += '<details>'
         
-        html += f'<summary>{section["header"]}<span class="period">{section["period"]}</span></summary>'
+        html += f'<summary class="heading">{section["header"]}<span class="period">{section["period"]}</span></summary>'
 
         if isinstance(section["text"]["en"], list):
             html += '<ul>'
@@ -53,7 +65,7 @@ def highlights():
             html += f'{section["text"]["en"]}'
 
         for lang in section["ref"].keys():
-            html += f'<details{" open" if lang == "en" else ""}><summary>References in {lang}</summary><ol>'
+            html += f'<details{" open" if lang == "en" else ""}><summary>Publications in {lang}</summary><ol>'
             for ref in section["ref"][lang]:
                 html += f'<li>{ref.replace("佐藤怜", "<u>佐藤怜</u>").replace("Rei Sato", "<u>Rei Sato</u>")}</li>'
             html += '</ol></details>'
@@ -61,9 +73,11 @@ def highlights():
     return html
 
 html = profile()
-tmp = tmp.replace("{PROFILE}", html)
+tmp = tmp.replace("${PROFILE}", html)
 html = highlights()
-tmp = tmp.replace("{HIGHLIGHTS}", html)
+tmp = tmp.replace("${HIGHLIGHTS}", html)
+html = blog(bs)
+tmp = tmp.replace("${BLOG}", html)
 
 with open("./cv.html", "w", encoding="utf-8") as f:
     f.write(tmp)

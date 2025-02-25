@@ -14,7 +14,7 @@
         max-width: 80rem;
         margin: auto;
       }
-      summary {
+      summary.heading {
         font-weight: bold;
       }
       details {
@@ -40,6 +40,9 @@
       }
       table.profile td:first-child {
         width: 25rem;
+      }
+      table.blog td:first-child {
+        width: 10rem;
       }
       hr {
         border-color: #222;
@@ -91,11 +94,15 @@
         <td>Rei Sato</td>
       </tr>
       <tr>
+        <td>Name (Pronunciation)</td>
+        <td>ray sa-toe</td>
+      </tr>
+      <tr>
         <td>Name (in Kanji)</td>
         <td>佐藤 怜</td>
       </tr>
       <tr>
-        <td>Born</td>
+        <td>Birth</td>
         <td>Nov. 1997</td>
       </tr>
       <tr>
@@ -156,9 +163,9 @@
 
     <h2>Highlights</h2>
     <details open>
-      <summary>Research on Large Language Models<span class="period">Jan. 2024 - Present</span></summary>
+      <summary class="heading">Research on Large Language Models<span class="period">Jan. 2024 - Present</span></summary>
       <details open>
-        <summary>References in en</summary>
+        <summary>Publications in en</summary>
         <ol>
           <li>
             Akifumi Wachi, Thien Q. Tran, <u>Rei Sato</u>, Takumi Tanabe, Youhei Akimoto. Stepwise Alignment for Constrained Language Model Policy Optimization. Neural
@@ -173,7 +180,7 @@
       </details>
     </details>
     <details open>
-      <summary>Work at LINE<span class="period">Apr. 2022 - Present</span></summary>
+      <summary class="heading">Work at LINE<span class="period">Apr. 2022 - Present</span></summary>
       <ul>
         <li>LINE is one of the most widely used messenger apps in Japan, with approximately 100 million users accessing diverse content through the platform.</li>
         <li>
@@ -191,7 +198,7 @@
       </ul>
     </details>
     <details open>
-      <summary>Research on Sim-to-Real in Reinforcement Learning<span class="period">Apr. 2019 - Present</span></summary>
+      <summary class="heading">Research on Sim-to-Real in Reinforcement Learning<span class="period">Apr. 2019 - Present</span></summary>
       <ul>
         <li>
           A common approach to applying reinforcement learning in real-world applications is to pretrain agents using simulators or offline datasets, as training them
@@ -204,7 +211,7 @@
         </li>
       </ul>
       <details open>
-        <summary>References in en</summary>
+        <summary>Publications in en</summary>
         <ol>
           <li>
             <u>Rei Sato</u>, Kazuto Fukuchi, Jun Sakuma, Youhei Akimoto. Few-Shot Image-to-Semantics Translation for Policy Transfer in Reinforcement Learning.
@@ -220,7 +227,7 @@
         </ol>
       </details>
       <details>
-        <summary>References in ja</summary>
+        <summary>Publications in ja</summary>
         <ol>
           <li>
             <u>佐藤怜</u>, 福地一斗, 佐久間淳, 秋本洋平. 強化学習における遷移確率を用いたドメイン適応による方策の転移. 人工知能学会全国大会, 2020. [<a
@@ -238,7 +245,7 @@
       </details>
     </details>
     <details>
-      <summary>Research on Neural Architecture Search<span class="period">Apr. 2018 - 2022</span></summary>
+      <summary class="heading">Research on Neural Architecture Search<span class="period">Apr. 2018 - 2022</span></summary>
       <ul>
         <li>
           Neural Architecture Search (NAS) algorithmically optimizes the architecture of deep neural networks, and gradient-based NAS defines differentiable architectures
@@ -254,7 +261,7 @@
         </li>
       </ul>
       <details open>
-        <summary>References in en</summary>
+        <summary>Publications in en</summary>
         <ol>
           <li>
             <u>Rei Sato</u>, Jun Sakuma, Youhei Akimoto. AdvantageNAS: Efficient Neural Architecture Search with Credit Assignment. AAAI Conference on Artificial
@@ -269,7 +276,7 @@
         </ol>
       </details>
       <details>
-        <summary>References in ja</summary>
+        <summary>Publications in ja</summary>
         <ol>
           <li>
             <u>佐藤怜</u>, 秋本洋平, 佐久間淳. 貢献度分配を導入した方策勾配によるNeural Architecture Searchの高速化. 人工知能学会全国大会, 2019. [<a
@@ -288,13 +295,13 @@
       </details>
     </details>
     <details>
-      <summary>As a Graduate Student<span class="period">Apr. 2020 - Mar. 2022</span></summary>
+      <summary class="heading">As a Graduate Student<span class="period">Apr. 2020 - Mar. 2022</span></summary>
       <ul>
         <li>Contributed to research on constrained black-box optimization leveraging deep generative models, with a co-authored paper accepted by IEEE Access.</li>
         <li>The Dean Award for Academic Excellence was awarded by University of Tsukuba in Mar. 2022.</li>
       </ul>
       <details open>
-        <summary>References in en</summary>
+        <summary>Publications in en</summary>
         <ol>
           <li>
             Naoki Sakamoto, <u>Rei Sato</u>, Kazuto Fukuchi, Jun Sakuma, Youhei Akimoto. Explicitly Constrained Black-Box Optimization With Disconnected Feasible Domains
@@ -303,7 +310,7 @@
         </ol>
       </details>
       <details>
-        <summary>References in ja</summary>
+        <summary>Publications in ja</summary>
         <ol>
           <li>
             阪本直気, <u>佐藤怜</u>, 福地一斗, 佐久間淳, 秋本洋平. 複数の損失関数を用いた深層生成モデルの訓練と制約付きブラックボックス最適化への適用.
@@ -313,13 +320,13 @@
       </details>
     </details>
     <details>
-      <summary>As an Undergraduate Student<span class="period">Apr. 2016 - Mar. 2020</span></summary>
+      <summary class="heading">As an Undergraduate Student<span class="period">Apr. 2016 - Mar. 2020</span></summary>
       <ul>
         <li>Published a blog post summarizing 80 papers on model compression, focusing on accelerating inference and reducing parameters in deep neural networks.</li>
         <li>The Dean's Award for excellence in academic research was awarded by University of Tsukuba in Mar. 2020.</li>
       </ul>
       <details>
-        <summary>References in ja</summary>
+        <summary>Publications in ja</summary>
         <ol>
           <li><a href="http://madoibito80.hatenablog.jp/entry/2018/04/06/121059">深層学習のモデル圧縮・高速化に関する論文80本ノック</a>, Apr. 2018</li>
           <li><a href="https://www.coins.tsukuba.ac.jp/award/">情報科学類の卒業生総代・表彰者</a></li>
@@ -327,7 +334,7 @@
       </details>
     </details>
     <details>
-      <summary>As a High School Student<span class="period">Apr. 2013 - Mar. 2016</span></summary>
+      <summary class="heading">As a High School Student<span class="period">Apr. 2013 - Mar. 2016</span></summary>
       <ul>
         <li>
           Passed national certification exams for NSPC 3rd grade Certified Skilled Worker of Web Design in Jun. 2013 and for IPA Information Security Specialist in Dec.
@@ -339,7 +346,7 @@
         <li>Selected as a participant in National Security Camp held in Aug. 2015.</li>
       </ul>
       <details>
-        <summary>References in ja</summary>
+        <summary>Publications in ja</summary>
         <ol>
           <li><a href="https://resemom.jp/article/2014/11/25/21580.html">あいちゃれ 2014、都立高2年の<u>佐藤怜</u>さんが最優秀賞…多くの審査員が賞賛</a>, Nov. 2014</li>
         </ol>
@@ -348,39 +355,44 @@
 
     <hr />
     <h2>Blog Posts</h2>
-    <table>
+    <table class="blog">
       <tr>
-        <td>Jan. 2025</td>
-        <td><a href="https://techblog.lycorp.co.jp/ja/20250129b">NeurIPS 2024 参加レポート：LLMの安全性を向上させる手法を発表しました</a></td>
-      </tr>
-      <tr>
-        <td>Jan. 2025</td>
-        <td>
-          <a href="https://speakerdeck.com/reisato12345/neurips-2024-can-jia-bao-gao-and-lun-wen-shao-jie-sacpo-ctrl-g"
-            >NeurIPS 2024 参加報告 & 論文紹介 (SACPO, Ctrl-G)</a
-          >
-        </td>
-      </tr>
-      <tr>
-        <td width="110px">Oct. 2024</td>
+        <td>Oct. 2024</td>
         <td><a href="../blog/crypto_storage_website/index.html">Storing Data Permanently, as a Website: A Review of Arweave and AR.IO</a></td>
       </tr>
       <tr>
         <td>Sep. 2024</td>
         <td><a href="../blog/py_winapi_mod/index.html">Creating Extensions for Compiled Applications: Interacting with Memory Using Python and Windows API</a></td>
       </tr>
-      <tr>
-        <td>Jan. 2024</td>
-        <td><a href="https://speakerdeck.com/reisato12345/neurips2023-paper-reading-pgdiff">NeurIPS2023 paper reading lightning talk (PGDiff)</a></td>
-      </tr>
-      <tr>
-        <td>Feb. 2023</td>
-        <td><a href="https://speakerdeck.com/reisato12345/neurips2022-face-image-synthesis-series">NeurIPS2022 Face Image Synthesis Series</a></td>
-      </tr>
-      <tr>
-        <td>Jan. 2023</td>
-        <td><a href="https://engineering.linecorp.com/ja/blog/NeurIPS-2022-report">NeurIPS2022参加報告</a></td>
-      </tr>
     </table>
+    <details>
+      <summary>in ja</summary>
+      <table class="blog">
+        <tr>
+          <td>Jan. 2025</td>
+          <td><a href="https://techblog.lycorp.co.jp/ja/20250129b">NeurIPS 2024 参加レポート：LLMの安全性を向上させる手法を発表しました</a></td>
+        </tr>
+        <tr>
+          <td>Jan. 2025</td>
+          <td>
+            <a href="https://speakerdeck.com/reisato12345/neurips-2024-can-jia-bao-gao-and-lun-wen-shao-jie-sacpo-ctrl-g"
+              >NeurIPS 2024 参加報告 & 論文紹介 (SACPO, Ctrl-G)</a
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>Jan. 2024</td>
+          <td><a href="https://speakerdeck.com/reisato12345/neurips2023-paper-reading-pgdiff">NeurIPS2023 paper reading lightning talk (PGDiff)</a></td>
+        </tr>
+        <tr>
+          <td>Feb. 2023</td>
+          <td><a href="https://speakerdeck.com/reisato12345/neurips2022-face-image-synthesis-series">NeurIPS2022 Face Image Synthesis Series</a></td>
+        </tr>
+        <tr>
+          <td>Jan. 2023</td>
+          <td><a href="https://engineering.linecorp.com/ja/blog/NeurIPS-2022-report">NeurIPS2022参加報告</a></td>
+        </tr>
+      </table>
+    </details>
   </body>
 </html>

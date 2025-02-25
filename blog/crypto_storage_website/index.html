@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Storing Data Permanently, as a Website: A Review of Arweave and AR.IO</title>
-    <link rel="stylesheet" href="../../cv/sakura.css" />
+    <link rel="stylesheet" href="../sakura.css" />
     <link rel="stylesheet" href="../../common/prism.css" />
   </head>
   <body>
@@ -49,7 +49,7 @@
     size of the attached data, and transactions below this fee will be rejected, meaning that submitting larger files requires higher payments.
 
     <h3>2.4. Maintaining Data for Over 10 Years without Contract Renewal</h3>
-    <strong>Reward Emission</strong>
+    <strong>Reward Emission.</strong>
     As previously mentioned, the user's payment is made only once when submitting a transaction. But do miners have the incentive to store data for over 10 years with
     only a one-time payment from users?
 
@@ -66,7 +66,7 @@
     <a href="https://github.com/ArweaveTeam/arweave/blob/758de1e553d0370bf58b8ef658ecd64542658516/apps/arweave/include/ar_pricing.hrl#L55-L66">[code5]</a>.
 
     <br />
-    <strong>Endowment Pool</strong>
+    <strong>Endowment Pool.</strong>
     To ensure the reward is stable and sustainable, Arweave calculates rewards as follows: the rewards for miners are composed of the sum of <code>R_fees</code>,
     <code>R_inflation</code>, and <code>R_endowment</code> <a href="https://www.arweave.org/yellow-paper.pdf">[yellow]</a>. <code>R_fees</code> refer to the total
     transaction fees included in a block, but not all of these fees are immediately paid to miners. Instead, the majority is reserved in the endowment pool for future
@@ -74,13 +74,13 @@
     generated blocks) increases. <code>R_endowment</code> is only paid from the endowment pool when the sum of the other two components falls below the storage cost.
 
     <br />
-    <strong>Transaction Fee</strong>
+    <strong>Transaction Fee.</strong>
     In order to continue the incentive mechanism over 200 years (which is virtually permanent), the minimum transaction fee imposed on users is calculated as the
     perpetual storage cost. To prevent the fee from diverging to infinity, Arweave assumes the cost of storage will decay consistently
     <a href="https://github.com/ArweaveTeam/arweave/blob/694f4cc3731c1c5d04830d1e45896ed020b6a21d/apps/arweave/src/ar_pricing.erl#L240-L251">[code6]</a>.
 
     <br />
-    <strong>Succinct Proof of Random Access (SPoRA)</strong>
+    <strong>Succinct Proof of Random Access (SPoRA).</strong>
     If rewards are paid for block generation, how are block generation and data storage related? In Arweave, the data stored across the entire network is called the
     <i>weave</i>, and to mine a new block, it is necessary to calculate a hash using a randomly selected portion of the weave. Therefore, to increase the probability of
     generating new blocks and earning rewards, miners are incentivized to store as many partitions of the weave as possible
@@ -96,7 +96,7 @@
     <a href="https://www.arweave.org/yellow-paper.pdf">[yellow]</a>.
 
     <h3>2.5. Publishing Data as a Website: AR.IO</h3>
-    <strong>Gateway</strong>
+    <strong>Gateway.</strong>
     Arweave's miner nodes are equipped with an API that returns data from previously generated blocks in response to HTTP requests, allowing content (e.g., HTML, JPEG) to
     be displayed in web browsers
     <a href="https://github.com/ArweaveTeam/arweave/blob/0e8ea0be08c546787a46f1d952d27a6346a652cc/http_iface_docs.md#get-transaction-body-as-html-via-id">[api2]</a>
@@ -106,7 +106,7 @@
     necessary to consider both the incentive design and decentralized management of the web servers that provide access to Arweave, referred to as <i>gateways</i>.
 
     <br />
-    <strong>AR.IO</strong>
+    <strong>AR.IO.</strong>
     Here, I mention AR.IO, a noteworthy gateway project. In AR.IO, nodes serve not only as gateways that return content stored on the Arweave network in response to HTTP
     requests, but also as observers that monitor other gateways. By fulfilling these roles, nodes are rewarded with IO tokens from the protocol, providing an incentive to
     increase their availability. The tokens are supplied both by the protocol itself and through revenue earned from the Arweave Name System (ArNS), which functions

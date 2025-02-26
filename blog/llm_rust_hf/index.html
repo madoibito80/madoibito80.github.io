@@ -14,12 +14,12 @@
     </div>
 
     <h2>1. Introduction</h2>
-    This document explains and implements key concepts to deepen the understanding of how conversational LLMs operate. To this end, I implemented Llama 3.2 inference code
-    in Rust, providing insights into the inner workings of large language models.
+    This document explains and implements key concepts to deepen the understanding of how conversational large language models (LLMs) operate. To this end, I implemented
+    Llama 3.2 inference code in Rust, providing insights into the inner workings of LLMs.
 
     <h2>2. Llama 3.2</h2>
     Llama is one of today's most widely used generative language models, developed and released by Meta. This section provides an overview of how Llama operates, though
-    many aspects are common to other large language models (LLMs) as well.
+    many aspects are common to other LLMs as well.
     <br />Llama adopts a decoder-only Transformer architecture, where it takes a token sequence converted from an input string and predicts the subsequent tokens. It can
     also predict multiple tokens consecutively. In such cases, previously generated tokens are appended to the end of the input token sequence in an auto-regressive
     manner. A token is an ID corresponding to a string, which is transformed into dense features in the initial embedding layer of the network.

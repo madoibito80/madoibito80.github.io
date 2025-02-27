@@ -20,7 +20,6 @@
       details {
         padding: 5px 15px;
         margin: 15px 0px;
-        box-shadow: -1px 0 0 #222;
       }
       details details {
         margin-left: 15px;
@@ -63,10 +62,13 @@
         border: 1px solid #aaaaaa;
         margin-right: 0.5rem;
       }
+      a:visited {
+        color: blue;
+      }
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="container blind">
       <div class="left">
         <img src="img/Oct2023.jpg" style="max-width: 100%" />
       </div>
@@ -86,7 +88,6 @@
       });
     </script>
 
-    <hr />
     ${PROFILE}
 
     <h2>Highlights</h2>
@@ -95,5 +96,17 @@
     <hr />
     <h2>Blog Posts</h2>
     ${BLOG}
+
+    <input type="checkbox" id="toggle" class="blind" />
+    <script>
+      document.getElementById("toggle").addEventListener("change", function () {
+        document.querySelectorAll(".blind").forEach((el) => {
+          el.style.display = this.checked ? "none" : "block";
+        });
+        document.querySelectorAll("details").forEach((el) => {
+          el.setAttribute("open", "");
+        });
+      });
+    </script>
   </body>
 </html>

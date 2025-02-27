@@ -37,7 +37,7 @@ def blog(bs):
     html = ''
     for lang in ["en", "ja"]:
         if lang == "ja":
-            html += '<details><summary>in ja</summary>'
+            html += '<details class="blind"><summary>in ja</summary>'
         html += '<table class="blog">'
         for blog in bs[lang]:
             html += f'<tr><td>{blog["date"]}</td><td>{blog["link"]}</td></tr>'
@@ -65,7 +65,7 @@ def highlights():
             html += f'{section["text"]["en"]}'
 
         for lang in section["ref"].keys():
-            html += f'<details{" open" if lang == "en" else ""}><summary>Publications in {lang}</summary><ol>'
+            html += f'<details{" open" if lang == "en" else " class=\"blind\""}><summary>Publications in {lang}</summary><ol>'
             for ref in section["ref"][lang]:
                 html += f'<li>{ref.replace("佐藤怜", "<u>佐藤怜</u>").replace("Rei Sato", "<u>Rei Sato</u>")}</li>'
             html += '</ol></details>'

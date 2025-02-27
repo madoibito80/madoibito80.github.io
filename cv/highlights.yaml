@@ -12,7 +12,9 @@
       - <a href="../blog/llm_rust_hf/index.html">Exploring Llama 3.2 with Rust and Hugging
         Face Tools</a>, Dec. 2024
   text:
-    en: ""
+    en:
+      - "Contributed to research on preference tuning (alignment) of large language models (LLMs), and our paper was accepted at NeurIPS."
+      - "Led a survey project and gathered information on recommender systems and large language models."
 - emph: true
   header: Work at LINE
   period: Apr. 2022 - Present
@@ -21,9 +23,9 @@
     en:
       - LINE is one of the most widely used messenger apps in Japan, with approximately
         100 million users accessing diverse content through the platform.
-      - Was responsible for designing and operating a pipeline to process and store
-        user interaction histories as features to deliver more relevant content to users.
-      - Contributed to developing machine learning models to predict user attributes
+      - Designed and operated pipelines to process and store
+        user interaction histories as features to build recommender systems.
+      - Contributed to developing machine learning models to predict user profiles
         (such as age and gender) for personalized advertising by utilizing the above
         features.
       - Worked on improving the sticker suggestion feature used during message composition

@@ -20,7 +20,6 @@
       details {
         padding: 5px 15px;
         margin: 15px 0px;
-        box-shadow: -1px 0 0 #222;
       }
       details details {
         margin-left: 15px;
@@ -63,10 +62,13 @@
         border: 1px solid #aaaaaa;
         margin-right: 0.5rem;
       }
+      a:visited {
+        color: blue;
+      }
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="container blind">
       <div class="left">
         <img src="img/Oct2023.jpg" style="max-width: 100%" />
       </div>
@@ -86,7 +88,6 @@
       });
     </script>
 
-    <hr />
     <h2>Profile</h2>
     <table class="profile">
       <tr>
@@ -142,7 +143,7 @@
         <td>
           <strong>University of Tsukuba</strong><br /><span class="fi fi-jp fi-bordered"></span>Tsukuba City, Ibaraki, Japan<br />Degree Programs in Systems and
           Information Engineering, Master's Program in Computer Science<br />
-          <details>
+          <details class="blind">
             <summary>in ja</summary>
             筑波大学 大学院理工情報生命学術院 システム情報工学研究群 情報理工学位プログラム<br />修士(工学)
           </details>
@@ -153,7 +154,7 @@
         <td>
           <strong>University of Tsukuba</strong><br /><span class="fi fi-jp fi-bordered"></span>Tsukuba City, Ibaraki, Japan<br />College of Information Science, Machine
           Intelligence and Media Technologies Major<br />
-          <details>
+          <details class="blind">
             <summary>in ja</summary>
             筑波大学 情報学群 情報科学類 知能情報メディア主専攻<br />学士(情報工学)
           </details>
@@ -164,6 +165,10 @@
     <h2>Highlights</h2>
     <details open>
       <summary class="heading">Research on Large Language Models<span class="period">Jan. 2024 - Present</span></summary>
+      <ul>
+        <li>Contributed to research on preference tuning (alignment) of large language models (LLMs), and our paper was accepted at NeurIPS.</li>
+        <li>Led a survey project and gathered information on recommender systems and large language models.</li>
+      </ul>
       <details open>
         <summary>Publications in en</summary>
         <ol>
@@ -183,11 +188,9 @@
       <summary class="heading">Work at LINE<span class="period">Apr. 2022 - Present</span></summary>
       <ul>
         <li>LINE is one of the most widely used messenger apps in Japan, with approximately 100 million users accessing diverse content through the platform.</li>
+        <li>Designed and operated pipelines to process and store user interaction histories as features to build recommender systems.</li>
         <li>
-          Was responsible for designing and operating a pipeline to process and store user interaction histories as features to deliver more relevant content to users.
-        </li>
-        <li>
-          Contributed to developing machine learning models to predict user attributes (such as age and gender) for personalized advertising by utilizing the above
+          Contributed to developing machine learning models to predict user profiles (such as age and gender) for personalized advertising by utilizing the above
           features.
         </li>
         <li>
@@ -226,7 +229,7 @@
           </li>
         </ol>
       </details>
-      <details>
+      <details class="blind">
         <summary>Publications in ja</summary>
         <ol>
           <li>
@@ -275,7 +278,7 @@
           </li>
         </ol>
       </details>
-      <details>
+      <details class="blind">
         <summary>Publications in ja</summary>
         <ol>
           <li>
@@ -309,7 +312,7 @@
           </li>
         </ol>
       </details>
-      <details>
+      <details class="blind">
         <summary>Publications in ja</summary>
         <ol>
           <li>
@@ -325,7 +328,7 @@
         <li>Published a blog post summarizing 80 papers on model compression, focusing on accelerating inference and reducing parameters in deep neural networks.</li>
         <li>The Dean's Award for excellence in academic research was awarded by University of Tsukuba in Mar. 2020.</li>
       </ul>
-      <details>
+      <details class="blind">
         <summary>Publications in ja</summary>
         <ol>
           <li><a href="http://madoibito80.hatenablog.jp/entry/2018/04/06/121059">深層学習のモデル圧縮・高速化に関する論文80本ノック</a>, Apr. 2018</li>
@@ -345,7 +348,7 @@
         </li>
         <li>Selected as a participant in National Security Camp held in Aug. 2015.</li>
       </ul>
-      <details>
+      <details class="blind">
         <summary>Publications in ja</summary>
         <ol>
           <li><a href="https://resemom.jp/article/2014/11/25/21580.html">あいちゃれ 2014、都立高2年の<u>佐藤怜</u>さんが最優秀賞…多くの審査員が賞賛</a>, Nov. 2014</li>
@@ -365,7 +368,7 @@
         <td><a href="../blog/py_winapi_mod/index.html">Creating Extensions for Compiled Applications: Interacting with Memory Using Python and Windows API</a></td>
       </tr>
     </table>
-    <details>
+    <details class="blind">
       <summary>in ja</summary>
       <table class="blog">
         <tr>
@@ -394,5 +397,17 @@
         </tr>
       </table>
     </details>
+
+    <input type="checkbox" id="toggle" class="blind" />
+    <script>
+      document.getElementById("toggle").addEventListener("change", function () {
+        document.querySelectorAll(".blind").forEach((el) => {
+          el.style.display = this.checked ? "none" : "block";
+        });
+        document.querySelectorAll("details").forEach((el) => {
+          el.setAttribute("open", "");
+        });
+      });
+    </script>
   </body>
 </html>

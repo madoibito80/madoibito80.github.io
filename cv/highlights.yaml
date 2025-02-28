@@ -13,7 +13,7 @@
         Face Tools</a>, Dec. 2024
   text:
     en:
-      - "Contributed to research on preference tuning (alignment) of large language models (LLMs), and our paper was accepted at NeurIPS."
+      - "Contributed to research on preference tuning (alignment) of large language models (LLMs), which led to a paper accepted at NeurIPS."
       - "Led a survey project and gathered information on recommender systems and large language models."
 - emph: true
   header: Work at LINE
@@ -21,15 +21,13 @@
   ref: {}
   text:
     en:
-      - LINE is one of the most widely used messenger apps in Japan, with approximately
-        100 million users accessing diverse content through the platform.
+      - Worked on machine learning models and data pipelines for LINE, Japan’s leading messaging platform with 100M users.
       - Designed and operated pipelines to process and store
         user interaction histories as features to build recommender systems.
       - Contributed to developing machine learning models to predict user profiles
         (such as age and gender) for personalized advertising by utilizing the above
         features.
-      - Worked on improving the sticker suggestion feature used during message composition
-        (suggesting stickers matching user input text). This involved creating an annotation
+      - Worked on improving the sticker suggestion feature, which suggests stickers based on user input text. This involved creating an annotation
         tool, defining metrics for evaluating the suggestion feature, and building a
         pipeline to calculate these metrics from actual user logs.
       - "The following technologies were utilized in these projects: Python, Apache

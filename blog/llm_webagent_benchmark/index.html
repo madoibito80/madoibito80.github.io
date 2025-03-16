@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>40+ Web Agent Benchmarks for Evaluating GUI Understanding and Manipulation Abilities</title>
+    <link rel="stylesheet" href="../sakura.css" />
+    <link rel="stylesheet" href="../../common/prism.css" />
+  </head>
+  <body>
+    <script src="../../common/prism.js"></script>
+
+    <div style="text-align: center">
+      <h2>40+ Web Agent Benchmarks for Evaluating GUI Understanding and Manipulation Abilities</h2>
+      Rei Sato<br />Mar. 2025
+    </div>
+    <h2>Introduction</h2>
+    LLM-powered web agents take natural language instructions from humans, along with information about the current webpage (such as HTML, the DOM tree, a screenshot, and
+    the accessibility tree), and LLMs generate browser operations as output (primarily the target element, the type of operation, and specified values). Note that in the
+    following parts, natural language instructions are also referred to as tasks, information about the current webpage as observations, and browser operations as
+    actions. To generate correct actions, it is essential to accurately interpret the webpage GUI's visual information and layout. This article categorizes and introduces
+    benchmarks that specifically evaluate the ability of web agents to understand and manipulate webpage GUIs.
+
+    <h2>1. Simulated Web Environment</h2>
+    This category of benchmarks hosts simulated websites that mimic real-world sites to evaluate how effectively agents can navigate them. Agents interact with these
+    simulated websites by controlling a web browser via libraries such as Playwright. These benchmarks provide agents with exploration opportunities while eliminating
+    concerns about spam-like negative impacts on real-world services. To enhance realism, some studies utilize open-source software such as GitLab and scrape real product
+    information from Amazon to construct simulated websites.
+
+    <h4>WoB (particularly MiniWoB)</h4>
+    <ul>
+      <li>Date: Aug. 2017</li>
+      <li>Paper: <a href="https://dl.acm.org/doi/10.5555/3305890.3306005">World of Bits: An OpenDomain Platform for WebBased Agents</a></li>
+      <li>
+        Description: MiniWoB is a fundamental web GUI task, where a reward is given for performing the correct action. FormWoB records HTTP communications of human
+        interactions on actual airline websites via a proxy and aims for the agent to replay the correct HTTP request for a given task. QAWoB is a dataset where the
+        correct DOM elements are annotated as answers for web pages and their corresponding questions.
+      </li>
+    </ul>
+    <h4>MiniWoB++</h4>
+    <ul>
+      <li>Date: Feb. 2018</li>
+      <li>Paper: <a href="https://arxiv.org/abs/1802.08802">Reinforcement Learning on Web Interfaces Using WorkflowGuided Exploration</a></li>
+      <li>Repository: <a href="https://github.com/FaramaFoundation/miniwobplusplus">FaramaFoundation/miniwobplusplus</a></li>
+      <li>Description: An extended version of MiniWoB incorporating stochastic characteristics and additional tasks.</li>
+    </ul>
+    <h4>WebShop</h4>
+    <ul>
+      <li>Date: Jul. 2022</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2207.01206">WebShop: Towards Scalable RealWorld Web Interaction with Grounded Language Agents</a></li>
+      <li>Repository: <a href="https://github.com/princetonnlp/WebShop">princetonnlp/WebShop</a></li>
+      <li>
+        Description: In a simulated online shopping site built using product information scraped from Amazon, the agent repeatedly performs highlevel (abstract) actions
+        to evaluate whether it can purchase a product close to the given task.
+      </li>
+    </ul>
+    <h4>WebArena</h4>
+    <ul>
+      <li>Date: Jul. 2023</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2307.13854">WebArena: A Realistic Web Environment for Building Autonomous Agents</a></li>
+      <li>Repository: <a href="https://github.com/webarenax/webarena">webarenax/webarena</a></li>
+      <li>
+        Description: A simulated website, built with real OSS web services such as Reddit and GitLab, requires a sequence of lowlevel actions to complete highlevel tasks.
+      </li>
+    </ul>
+    <h4>CompWoB</h4>
+    <ul>
+      <li>Date: Nov. 2023</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2311.18751">Exposing Limitations of Language Model Agents in SequentialTask Compositions on the Web</a></li>
+      <li>Repository: <a href="https://github.com/googleresearch/googleresearch/tree/master/compositional_rl/compwob">compositional_rl/compwob</a></li>
+      <li>Description: A benchmark composed of tasks that combine multiple MiniWoB tasks.</li>
+    </ul>
+    <h4>WebVLN</h4>
+    <ul>
+      <li>Date: Dec. 2023</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2312.15820">WebVLN: VisionandLanguage Navigation on Websites</a></li>
+      <li>Repository: <a href="https://github.com/WebVLN/WebVLN">WebVLN/WebVLN</a></li>
+      <li>
+        Description: A benchmark in which an agent navigates through an experimental shopping site by repeatedly selecting one of the available buttons and answering
+        questions.
+      </li>
+    </ul>
+    <h4>VisualWebArena</h4>
+    <ul>
+      <li>Date: Jan. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2401.13649">VisualWebArena: Evaluating Multimodal Agents on Realistic Visual Web Tasks</a></li>
+      <li>Repository: <a href="https://github.com/webarenax/visualwebarena">webarenax/visualwebarena</a></li>
+      <li>
+        Description: A benchmark that inherits some tasks from WebArena while adding tasks where visual information is crucial (e.g., Buy the least expensive red
+        blanket).
+      </li>
+    </ul>
+    <h4>WorkArena</h4>
+    <ul>
+      <li>Date: Mar. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2403.07718">WorkArena: How Capable Are Web Agents at Solving Common Knowledge Work Tasks?</a></li>
+      <li>Repository: <a href="https://github.com/ServiceNow/WorkArena">ServiceNow/WorkArena</a></li>
+      <li>Description: A benchmark for performing businessoriented tasks on enterprise cloud services (ServiceNow).</li>
+    </ul>
+    <h4>TurkingBench</h4>
+    <ul>
+      <li>Date: Mar. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2403.11905">Tur[k]ingBench: A Challenge Benchmark for Web Agents</a></li>
+      <li>Repository: <a href="https://github.com/JHUCLSP/turkingbench">JHUCLSP/turkingbench</a></li>
+      <li>Description: A benchmark that requires lowlevel actions mimicking crowdsourcing on Amazon Mechanical Turk (AMT).</li>
+    </ul>
+    <h4>WorkArena++</h4>
+    <ul>
+      <li>Date: Jul. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2407.05291">WorkArena++: Towards Compositional Planning and Reasoningbased Common Knowledge Work Tasks</a></li>
+      <li>Repository: <a href="https://github.com/ServiceNow/WorkArena">ServiceNow/WorkArena</a></li>
+      <li>Description: A more complex version of WorkArena.</li>
+    </ul>
+    <h4>ST-WebAgentBench</h4>
+    <ul>
+      <li>Date: Oct. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2410.06703">STWebAgentBench: A Benchmark for Evaluating Safety and Trustworthiness in Web Agents</a></li>
+      <li>Repository: <a href="https://github.com/segevshlomov/STWebAgentBench">segevshlomov/STWebAgentBench</a></li>
+      <li>Description: A benchmark based on WebArena that allows for evaluating safety and trustworthiness.</li>
+    </ul>
+    <h4>VideoWebArena</h4>
+    <ul>
+      <li>Date: Oct. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2410.19100">VideoWebArena: Evaluating Long Context Multimodal Agents with Video Understanding Web Tasks</a></li>
+      <li>Repository: <a href="https://github.com/ljang0/videowebarena">ljang0/videowebarena</a></li>
+      <li>
+        Description: A benchmark that requires selecting appropriate lowlevel actions for tasks in WebArena and VisualWebArena by referencing tutorial videos created from
+        these tasks.
+      </li>
+    </ul>
+    <h4>TheAgentCompany</h4>
+    <ul>
+      <li>Date: Dec. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2412.14161">TheAgentCompany: Benchmarking LLM Agents on Consequential Real World Tasks</a></li>
+      <li>Repository: <a href="https://github.com/TheAgentCompany/TheAgentCompany">TheAgentCompany/TheAgentCompany</a></li>
+      <li>
+        Description: A diverse set of application operation tasks simulating software development workflows that involve browser interactions, with a closed environment
+        hosted using OSS such as GitLab and RocketChat.
+      </li>
+    </ul>
+    <h4>WebGames</h4>
+    <ul>
+      <li>Date: Feb. 2025</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2502.18356">WebGames: Challenging GeneralPurpose WebBrowsing AI Agents</a></li>
+      <li>Repository: <a href="https://github.com/convergenceai/webgames">convergenceai/webgames</a></li>
+      <li>Description: A benchmark aggregating basic browser interaction tasks, similar to MiniWoB++.</li>
+    </ul>
+    <h2>2. Open-Ended Task</h2>
+    Benchmarks in this category require connecting to the internet and navigating real webpages to complete tasks. Similar to a simulated environment, there is an
+    opportunity for exploration; however, real websites constantly change and sometimes disappear, causing the task's difficulty to vary over time. Hence, QA-format tasks
+    are prominent as they allow for abstract success evaluation. The focus is often on evaluating appropriate page transition capabilities for information retrieval. By
+    limiting the benchmarks to those with a specified starting URL, the chances of comparing GUI understanding and manipulation abilities for the same webpages increase.
+
+    <h4>WebNav</h4>
+    <ul>
+      <li>Date: Oct. 2020</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2010.12844">FLIN: A Flexible Natural Language Interface for Web Navigation</a></li>
+      <li>Repository: <a href="https://github.com/microsoft/flinnl2web">microsoft/flinnl2web</a></li>
+      <li>Description: A benchmark that accesses specified wellknown web services, outputs highlevel actions for tasks, and compares them with the correct answers.</li>
+    </ul>
+    <h4>WebVoyager</h4>
+    <ul>
+      <li>Date: Jan. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2401.13919">WebVoyager: Building an EndtoEnd Web Agent with Large Multimodal Models</a></li>
+      <li>Repository: <a href="https://github.com/MinorJerry/WebVoyager">MinorJerry/WebVoyager</a></li>
+      <li>
+        Description: A dataset of tasks that can be solved by navigating realworld websites from specified URLs, where the correctness of answers is abstract and thus
+        judged by humans or LLMs.
+      </li>
+    </ul>
+    <h4>OSWorld</h4>
+    <ul>
+      <li>Date: Apr. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2404.07972">OSWorld: Benchmarking Multimodal Agents for OpenEnded Tasks in Real Computer Environments</a></li>
+      <li>Repository: <a href="https://github.com/xlangai/OSWorld/tree/main/evaluation_examples/examples/chrome">xlangai/OSWorld</a></li>
+      <li>Description: A benchmark that requires diverse desktop application operations, including web page visits through browser interactions.</li>
+    </ul>
+    <h4>MMInA</h4>
+    <ul>
+      <li>Date: Apr. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2404.09992">MMInA: Benchmarking Multihop Multimodal Internet Agents</a></li>
+      <li>Repository: <a href="https://github.com/shulin16/mmina">shulin16/mmina</a></li>
+      <li>Description: A benchmark that involves visiting realworld websites to solve tasks, enabling success rate evaluation at each page transition (hop).</li>
+    </ul>
+    <h4>WebCanvas (Mind2Web-Live)</h4>
+    <ul>
+      <li>Date: Jun. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2406.12373">WebCanvas: Benchmarking Web Agents in Online Environments</a></li>
+      <li>Repository: <a href="https://github.com/iMeanAI/WebCanvas">iMeanAI/WebCanvas</a></li>
+      <li>Description: A benchmark for assessing whether an agent can successfully reach the correct state for a given task.</li>
+    </ul>
+    <h4>WebWalkerQA</h4>
+    <ul>
+      <li>Date: Jan. 2025</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2501.07572">WebWalker: Benchmarking LLMs in Web Traversal</a></li>
+      <li>Repository: <a href="https://huggingface.co/datasets/callanwu/WebWalkerQA">callanwu/WebWalkerQA</a></li>
+      <li>
+        Description: A benchmark where a query, its correct answer, and golden trajectories are given, and the task is to traverse a website from a specified starting URL
+        to find the answer.
+      </li>
+    </ul>
+    <h2>3. Static Dataset</h2>
+    This category consists of datasets that store either HTML, DOM trees, or screenshots as observations of webpages, ensuring that the correct elements for the tasks are
+    provided. These datasets can be broadly classified into annotation results for a single page or trajectory datasets spanning multiple actions and pages. In many
+    cases, the correct answers are provided through human annotation or demonstrations, but some studies have explored generating trajectories automatically using LLMs.
+
+    <h4>phrasenode</h4>
+    <ul>
+      <li>Date: Aug. 2018</li>
+      <li>Paper: <a href="https://arxiv.org/abs/1808.09132">Mapping Natural Language Commands to Web Elements</a></li>
+      <li>Repository: <a href="https://github.com/stanfordnlp/phrasenode">stanfordnlp/phrasenode</a></li>
+      <li>Description: A dataset of tasks for webpages and their corresponding correct elements, with only the HTML retained as observations.</li>
+    </ul>
+    <h4>WebSRC</h4>
+    <ul>
+      <li>Date: Jan. 2021</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2101.09465">WebSRC: A Dataset for WebBased Structural Reading Comprehension</a></li>
+      <li>Repository: <a href="https://xlance.github.io/WebSRC/">xlance/WebSRC</a></li>
+      <li>Description: A QA dataset for assessing structural understanding of webpages by extracting answers and their corresponding tags in response to questions.</li>
+    </ul>
+    <h4>RUSS</h4>
+    <ul>
+      <li>Date: Mar. 2021</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2103.16057">Grounding OpenDomain Instructions to Automate Web Support Tasks</a></li>
+      <li>Repository: <a href="https://github.com/xnancy/russ">xnancy/russ</a></li>
+      <li>Description: A dataset of DOM trees recorded on real websites, along with action histories corresponding to tasks.</li>
+    </ul>
+    <h4>Klarna Product Page Dataset</h4>
+    <ul>
+      <li>Date: Nov. 2021</li>
+      <li>
+        Paper: <a href="https://arxiv.org/abs/2111.02168">The Klarna Product Page Dataset: Web Element Nomination with Graph Neural Networks and Large Language Models</a>
+      </li>
+      <li>Repository: <a href="https://github.com/klarna/productpagedataset">klarna/productpagedataset</a></li>
+      <li>Description: A dataset of webpages and annotation results for their key elements, providing screenshots and MHTML files.</li>
+    </ul>
+    <h4>Mind2Web</h4>
+    <ul>
+      <li>Date: Jun. 2023</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2306.06070">Mind2Web: Towards a Generalist Agent for the Web</a></li>
+      <li>Repository: <a href="https://github.com/OSUNLPGroup/Mind2Web">OSUNLPGroup/Mind2Web</a></li>
+      <li>Description: A dataset containing snapshots such as MHTML from real websites, natural language tasks, and recorded human demonstrations.</li>
+    </ul>
+    <h4>AITW (Android in the Wild)</h4>
+    <ul>
+      <li>Date: Jul. 2023</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2307.10088">Android in the Wild: A LargeScale Dataset for Android Device Control</a></li>
+      <li>Repository: <a href="https://github.com/googleresearch/googleresearch/tree/master/android_in_the_wild">googleresearch/android_in_the_wild</a></li>
+      <li>Description: Diverse app interaction tasks, including browser operations, with Android screenshots as observations.</li>
+    </ul>
+    <h4>Multimodal Mind2Web</h4>
+    <ul>
+      <li>Date: Jan. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2401.01614">GPT4V(ision) is a Generalist Web Agent, if Grounded</a></li>
+      <li>Repository: <a href="https://huggingface.co/datasets/osunlp/MultimodalMind2Web">osunlp/MultimodalMind2Web</a></li>
+      <li>Description: A dataset with added screenshots using the raw dump of MIND2WEB.</li>
+    </ul>
+    <h4>ScreenSpot</h4>
+    <ul>
+      <li>Date: Jan. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2401.10935">SeeClick: Harnessing GUI Grounding for Advanced Visual GUI Agents</a></li>
+      <li>Repository: <a href="https://huggingface.co/datasets/rootsautomation/ScreenSpot">rootsautomation/ScreenSpot</a></li>
+      <li>Description: A dataset containing screenshots, tasks, and annotated correct elements across various GUI environments, including web browsers.</li>
+    </ul>
+    <h4>ScreenAI</h4>
+    <ul>
+      <li>Date: Feb. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2402.04615">ScreenAI: A VisionLanguage Model for UI and Infographics Understanding</a></li>
+      <li>Repository: <a href="https://github.com/googleresearchdatasets/screen_annotation">googleresearchdatasets/screen_annotation</a></li>
+      <li>Description: An annotated dataset containing navigation tasks for UIs, including webpages.</li>
+    </ul>
+    <h4>WEBLINX</h4>
+    <ul>
+      <li>Date: Feb. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2402.05930">WebLINX: RealWorld Website Navigation with MultiTurn Dialogue</a></li>
+      <li>Repository: <a href="https://github.com/McGillNLP/weblinx">McGillNLP/weblinx</a></li>
+      <li>
+        Description: A dataset that records demonstrations of highlevel task execution on real websites, including useragent interaction history throughout the process.
+      </li>
+    </ul>
+    <h4>ScreenAgent Dataset</h4>
+    <ul>
+      <li>Date: Feb. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2402.07945">ScreenAgent: A Vision Language Modeldriven Computer Control Agent</a></li>
+      <li>Repository: <a href="https://github.com/niuzaisheng/ScreenAgent">niuzaisheng/ScreenAgent</a></li>
+      <li>Description: A dataset of screenshots and lowlevel groundtruth actions targeting a diverse range of desktop applications, including browsers.</li>
+    </ul>
+    <h4>OmniACT</h4>
+    <ul>
+      <li>Date: Feb. 2024</li>
+      <li>
+        Paper: <a href="https://arxiv.org/abs/2402.17553">OmniACT: A Dataset and Benchmark for Enabling Multimodal Generalist Autonomous Agents for Desktop and Web</a>
+      </li>
+      <li>Repository: <a href="https://huggingface.co/datasets/Writer/omniact">Writer/omniact</a></li>
+      <li>
+        Description: A dataset providing tasks across diverse desktop environments, including web browsers, along with PyAutoGUI scripts created based on human
+        annotations.
+      </li>
+    </ul>
+    <h4>AITZ (Android in the Zoo)</h4>
+    <ul>
+      <li>Date: Mar. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2403.02713">Android in the Zoo: ChainofActionThought for GUI Agents</a></li>
+      <li>Repository: <a href="https://github.com/IMNearth/CoAT">IMNearth/CoAT</a></li>
+      <li>Description: Diverse app interaction tasks, including browser operations, with Android screenshots as observations.</li>
+    </ul>
+    <h4>VisualWebBench</h4>
+    <ul>
+      <li>Date: Apr. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2404.05955">VisualWebBench: How Far Have Multimodal LLMs Evolved in Web Page Understanding and Grounding?</a></li>
+      <li>Repository: <a href="https://github.com/VisualWebBench/VisualWebBench">VisualWebBench/VisualWebBench</a></li>
+      <li>Description: A QAbased task on webpage screenshots requiring element selection.</li>
+    </ul>
+    <h4>GUICourse</h4>
+    <ul>
+      <li>Date: Jun. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2406.11317">GUICourse: From General Vision Language Models to Versatile GUI Agents</a></li>
+      <li>Repository: <a href="https://github.com/RUCBM/GUICourse">RUCBM/GUICourse</a></li>
+      <li>Description: A dataset with diverse annotations applied to webpage screenshots, requiring GUI understanding to solve.</li>
+    </ul>
+    <h4>WONDERBREAD</h4>
+    <ul>
+      <li>Date: Jun. 2024</li>
+      <li>
+        Paper: <a href="https://arxiv.org/abs/2406.13264">WONDERBREAD: A Benchmark for Evaluating Multimodal Foundation Models on Business Process Management Tasks</a>
+      </li>
+      <li>Repository: <a href="https://github.com/HazyResearch/wonderbread">HazyResearch/wonderbread</a></li>
+      <li>
+        Description: Derived from WebArena, the dataset includes new features such as highlevel tasks like BPM (Business Process Management) and records human
+        demonstrations.
+      </li>
+    </ul>
+    <h4>AgentTrek</h4>
+    <ul>
+      <li>Date: Dec. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2412.09605">AgentTrek: Agent Trajectory Synthesis via Guiding Replay with Web Tutorials</a></li>
+      <li>Repository: <a href="https://github.com/xlangai/AgentTrek">xlangai/AgentTrek</a></li>
+      <li>
+        Description: A dataset created at low cost by collecting web tutorials (tasks and the operational steps to complete them), having an agent imitate the tutorials,
+        and recording the results as trajectories.
+      </li>
+    </ul>
+    <h4>Explorer</h4>
+    <ul>
+      <li>Date: Feb. 2025</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2502.11357">Explorer: Scaling Explorationdriven Web Trajectory Synthesis for Multimodal Web Agents</a></li>
+      <li>Description: A dataset containing largescale trajectories generated by having an LLM perform task generation, task execution, and task success evaluation.</li>
+    </ul>
+    <h2>4. Wrapper</h2>
+    This category includes a wrapper that enables multiple benchmarks to be evaluated within the same interface.
+
+    <h4>AgentBench</h4>
+    <ul>
+      <li>Date: Aug. 2023</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2308.03688">AgentBench: Evaluating LLMs as Agents</a></li>
+      <li>Repository: <a href="https://github.com/THUDM/AgentBench">THUDM/AgentBench</a></li>
+      <li>Description: Including WebShop and Mind2Web.</li>
+    </ul>
+    <h4>BrowserGym</h4>
+    <ul>
+      <li>Date: Mar. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2403.07718">WorkArena: How Capable Are Web Agents at Solving Common Knowledge Work Tasks?</a></li>
+      <li>Repository: <a href="https://github.com/ServiceNow/BrowserGym">ServiceNow/BrowserGym</a></li>
+      <li>Description: Including MiniWob++, WebArena, VisualWebArena, WorkArena, and WebLINX.</li>
+    </ul>
+    <h4>VisualAgentBench</h4>
+    <ul>
+      <li>Date: Aug. 2024</li>
+      <li>Paper: <a href="https://arxiv.org/abs/2408.06327">VisualAgentBench: Towards Large Multimodal Models as Visual Foundation Agents</a></li>
+      <li>Repository: <a href="https://github.com/THUDM/VisualAgentBench">THUDM/VisualAgentBench</a></li>
+      <li>Description: Including WebArena and VisualWebArena.</li>
+    </ul>
+  </body>
+</html>

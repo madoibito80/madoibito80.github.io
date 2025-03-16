@@ -25,12 +25,12 @@ for row in rows:
             html += "</ul>"
             in_ul = False
         lv = str(row.count("#")*2)
-        html += f"<h{lv}>{row.replace("#","").strip()}</h{lv}>"
+        html += f"<h{lv}>{row.lstrip("#").strip()}</h{lv}>"
     elif row.startswith("-"):
         if not in_ul:
             html += "<ul>"
             in_ul = True
-        html += f"<li>{row.replace("-", "").strip()}</li>"
+        html += f"<li>{row.lstrip("-").strip()}</li>"
     else:
         if in_ul:
             html += "</ul>"

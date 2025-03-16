@@ -1,6 +1,6 @@
 # Introduction
 
-LLM-powered web agents take natural language instructions from humans, along with information about the current webpage (such as HTML, the DOM tree, a screenshot, and the accessibility tree), and LLMs generate browser operations as output (primarily the target element, the type of operation, and specified values).
+LLM-powered web agents take natural language instructions from humans, along with information about the current webpage (such as HTML, a DOM tree, a screenshot, and an accessibility tree), and LLMs generate browser operations as output (primarily the target element, the type of operation, and specified values).
 Note that in the following parts, natural language instructions are also referred to as tasks, information about the current webpage as observations, and browser operations as actions.
 
 To generate correct actions, it is essential to accurately interpret the webpage GUI's visual information and layout.

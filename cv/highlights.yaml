@@ -45,6 +45,9 @@
       - Takumi Tanabe, Rei Sato, Kazuto Fukuchi, Jun Sakuma, Youhei Akimoto. Max-Min
         Off-Policy Actor-Critic Method Focusing on Worst-Case Robustness to Model Misspecification.
         Neural Information Processing Systems (NeurIPS), 2022. [<a href="https://arxiv.org/abs/2211.03413">arXiv</a>]
+      - Akifumi Wachi, Kohei Miyaguchi, Takumi Tanabe, Rei Sato, Youhei Akimoto.
+        A Provable Approach for End-to-End Safe Reinforcement Learning.
+        arXiv, 2025. [<a href="https://arxiv.org/abs/2505.21852">arXiv</a>]
     ja:
       - 佐藤怜, 福地一斗, 佐久間淳, 秋本洋平. 強化学習における遷移確率を用いたドメイン適応による方策の転移. 人工知能学会全国大会, 2020. [<a
         href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2020/0/JSAI2020_2J5GS203/_article/-char/ja/">J-STAGE</a>]

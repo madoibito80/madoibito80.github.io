@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Robotics Meets AI with the Hugging Face Ecosystem</title>
+    <link rel="stylesheet" href="../sakura.css" />
+    <link rel="stylesheet" href="../../common/prism.css" />
+  </head>
+  <body>
+    <script src="../../common/prism.js"></script>
+
+    <div style="text-align: center">
+      <h2>Robotics Meets AI with the Hugging Face Ecosystem</h2>
+      Rei Sato<br />Sep. 2025
+    </div>
+
+    <h2>1. Introduction</h2>
+    Robotics and AI are accelerating their collaboration, and Hugging Face has released three key tools that are driving the advancement of robotics and AI: (1) The
+    open-source, low-cost robotic arm SO-101 lowers the barrier to research and development with real-world robotics experiments. (2) The LeRobot library, a middleware
+    that connects hardware with AI-driven policies, facilitates hardware abstraction and dataset sharing. (3) The SmolVLA, a Vision-Language-Action model, is a foundation
+    model for robotics promoting the use of visual and language information in robotic applications. This article evaluates the potential of these latest tools proposed
+    by Hugging Face through experiments.
+
+    <h2>2. Preparation</h2>
+    <h4>2.1. SO-101</h4>
+    <a href="https://github.com/TheRobotStudio/SO-ARM100">SO-101</a> is an open-source 6DoF robotic arm
+    <a href="https://x.com/ClementDelangue/status/1916859453917241761">announced by Hugging Face in April 2025</a>. Its key advantage is that anyone can enter robotic-arm
+    research and development at a cost of only a few hundred dollars by combining specified <a href="https://www.feetechrc.com/">Feetech</a> servos with 3D-printed parts
+    based on the provided design data. The SO-101 pairs two arms, Leader and Follower, allowing a human expert to operate the Leader to teach movements to the Follower,
+    making it well suited for creating datasets for imitation learning. I purchased a complete set of parts from
+    <a href="https://www.seeedstudio.com/SO-ARM101-Low-Cost-AI-Arm-Kit-Pro-p-6427.html">Seeed Studio</a>
+    and assembled them by following the official <a href="https://huggingface.co/docs/lerobot/so101">assembly guide</a>.
+
+    <div style="text-align: center">
+      <figure>
+        <img src="labo.png" />
+        <figcaption>
+          <i
+            >Hardware setup used in the experiments. The black arm on the left is the SO-101 Leader, which is used for teleoperation. The white arm on the right is the
+            Follower.</i
+          >
+        </figcaption>
+      </figure>
+    </div>
+
+    <h4>2.2. LeRobot</h4>
+    <a href="https://github.com/huggingface/lerobot">LeRobot</a> is an open-source project led by Hugging Face that abstracts the connection between hardware such as the
+    SO-101 and AI models implemented with frameworks like PyTorch. LeRobot was used in this article for setting up the SO-101, recording training data, training models,
+    and performing inference with the trained model. This article was based on commit hash
+    <a href="https://github.com/huggingface/lerobot/tree/d602e8169cbad9e93a4a3b3ee1dd8b332af7ebf8">d602e81</a>.
+
+    <h4>2.3. SmolVLA</h4>
+    <a href="https://arxiv.org/abs/2506.01844">SmolVLA</a> is a Vision-Language-Action model released by Hugging Face in 2025 and serves as a foundation model for
+    robotics that has been pre-trained on large-scale data. Its VLM component uses SmolVLM-2 to process video inputs and language instructions, and the action expert
+    component generates actions based on the VLM output. The model has a total of 450M parameters, of which only the 100M parameters corresponding to the action expert
+    are trained.
+
+    <h2>3. Task and Dataset</h2>
+    To evaluate the visual-language understanding capability of the VLA, I designed the following task and created a dataset through teleoperation. A
+    <a href="plate.pdf">plate</a> was placed in front of the robotic arm, and on the plate two placement positions, called the left and right positions, were defined,
+    along with a square goal area where a block should be moved. In the initial state, a red LEGO block was placed at the left position and a blue LEGO block at the right
+    position for Pattern 0 and Pattern 1, while their positions were reversed for Pattern 2 and Pattern 3. The policy was given a language instruction such as "Pick the
+    {color} LEGO block and place it in the square region." The color in the instruction was red for Pattern 0 and Pattern 2, and blue for Pattern 1 and Pattern 3. With
+    this design, the policy must identify the correct block and position by using both the language instruction and the visual information, allowing me to evaluate its
+    integrated understanding of vision and language.
+
+    <br />
+    For each of the four patterns, 25 episodes were collected through teleoperation and released as a
+    <a href="https://huggingface.co/datasets/reisato80/lego-pick-and-place-v2">dataset on the Hugging Face Hub</a>.
+
+    <div style="text-align: center">
+      <figure>
+        <video src="dataset.mp4" controls></video>
+        <figcaption>
+          <i
+            >Examples from the training dataset created by teleoperation. Pattern 0 (top left), Pattern 1 (top right), Pattern 2 (bottom left), and Pattern 3 (bottom
+            right).</i
+          >
+        </figcaption>
+      </figure>
+    </div>
+
+    Here is the command I used:
+    <pre><code>python -m lerobot.record \
+  --robot.type=so101_follower \
+  --robot.port=/dev/ttyACM1 \
+  --robot.id=so101_follower_01 \
+  --robot.cameras="{ top: {type: opencv, index_or_path: 0, width: 1920, height: 1080, fps: 30}}" \
+  --teleop.type=so101_leader \
+  --teleop.port=/dev/ttyACM0 \
+  --teleop.id=so101_leader_01 \
+  --dataset.repo_id=reisato80/lego-pick-and-place-v2 \
+  --dataset.num_episodes=25 \
+  --dataset.single_task="Pick the red LEGO block and place it in the square region." \
+  --dataset.episode_time_s=15 \
+  --dataset.reset_time_s=10 \
+  --play_sounds=false \
+  --resume=false</code></pre>
+
+    <h2>4. Training</h2>
+    Using the created dataset, the VLM component of SmolVLA was frozen, and only the policy component was further trained. The hyperparameters followed the default
+    settings for SmolVLA fine-tuning provided by LeRobot. The training was performed on a <a href="https://www.runpod.io/">Runpod</a> machine with a single NVIDIA A100
+    80GB PCIe and took 10.8 hours.
+
+    <pre><code>python lerobot/src/lerobot/scripts/train.py \
+  --policy.path=lerobot/smolvla_base \
+  --dataset.repo_id=reisato80/lego-pick-and-place-v2 \
+  --batch_size=64 \
+  --steps=20000 \
+  --output_dir=outputs/train/smolvla_lego_v2 \
+  --job_name=smolvla_lego_v2 \
+  --policy.device=cuda \
+  --policy.repo_id=reisato80/smolvla_lego_v2 \
+  --wandb.enable=true</code></pre>
+
+    <div style="text-align: center">
+      <figure>
+        <img src="./learning_curve.png" style="width: 100%" />
+        <figcaption><i>Learning curve.</i></figcaption>
+      </figure>
+    </div>
+
+    <h2>5. Evaluation</h2>
+    For each of the four patterns, inference was performed five times using the fine-tuned SmolVLA as the policy.
+    <pre><code>python -m lerobot.record \
+  --robot.type=so101_follower \
+  --robot.port=/dev/ttyACM1 \
+  --robot.id=so101_follower_01 \
+  --robot.cameras="{ top: {type: opencv, index_or_path: 0, width: 1920, height: 1080, fps: 30}}" \
+  --teleop.type=so101_leader \
+  --teleop.port=/dev/ttyACM0 \
+  --teleop.id=so101_leader_01 \
+  --dataset.repo_id=reisato80/eval_lego-pick-and-place-v2 \
+  --dataset.num_episodes=5 \
+  --dataset.single_task="Pick the red LEGO block and place it in the square region." \
+  --dataset.episode_time_s=20 \
+  --dataset.reset_time_s=10 \
+  --policy.path=/home/user_lerobot/smolvla_lego_v2 \
+  --play_sounds=false \
+  --resume=false</code></pre>
+    The success rate for each pattern (correct color and position in parentheses) is as follows:
+    <ul>
+      <li>Pattern 0 (Red, Left): 20%</li>
+      <li>Pattern 1 (Blue, Right): 60%</li>
+      <li>Pattern 2 (Red, Right): 60%</li>
+      <li>Pattern 3 (Blue, Left): 20%</li>
+    </ul>
+
+    From the above results, (1) there is no observable difference in success rate depending on the color of the correct block, and (2) the success rate tends to be lower
+    when the correct block is located at the left position. In addition, among the 10 trials for Pattern 0 and Pattern 3 - the patterns in which the left position was
+    correct - there were 8 failures: 2 involved moving the wrong block, and 6 involved not moving either block.
+
+    <h4>5.1. Conclusion and Future Work</h4>
+    Overall, although the task was successfully completed with a certain probability, the success rate did not reach a level high enough to suggest the VLA's
+    visual-language capability.
+    <br />
+    Possible factors that prevented the success rate from increasing sufficiently, and that also indicate directions for future improvement, are as follows: (1) the
+    dataset contains too few episodes, and in particular the diversity of initial states needs to be increased; (2) the input camera images are limited to a single top
+    view, and inputs from two or more viewpoints are required.
+
+    <h2>Appendix</h2>
+    <h4>A. Tips for Docker on Windows WSL2</h4>
+    You can access devices such as the SO-101 and UVC cameras from a Docker container running on Windows WSL2 by executing the following commands sequentially in an
+    administrator PowerShell. The specific identifiers may vary depending on the environment, so modify them as needed.
+
+    <pre><code>usbipd list
+usbipd bind --busid 3-1
+usbipd attach --wsl --busid 3-1
+wsl
+sudo modprobe cdc-acm
+sudo modprobe uvcvideo
+ls /dev/{ttyACM*,video*}</code></pre>
+
+    Then, start the Docker container with the following commands:
+    <pre><code>cd lerobot
+docker build -f ./docker/Dockerfile.user -t lerobot .
+docker run -it `
+  --user root `
+  --device /dev/ttyACM0 `
+  --device /dev/ttyACM1 `
+  --device /dev/video0 `
+  --mount type=bind,source=F:/lerobot_home,target=/home/user_lerobot `
+  --gpus all `
+  lerobot</code></pre>
+  </body>
+</html>

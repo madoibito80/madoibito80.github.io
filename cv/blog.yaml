@@ -1,4 +1,6 @@
 en:
+  - date: Sep. 2025
+    link: '<a href="../blog/robotics_hf_vla/index.html">Robotics Meets AI with the Hugging Face Ecosystem</a>'
   - date: Oct. 2024
     link: '<a href="../blog/crypto_storage_website/index.html">Storing Data Permanently,
       as a Website: A Review of Arweave and AR.IO</a>'

@@ -19,18 +19,24 @@ hl = prepare("highlights.yaml")
 ps = prepare("profile.yaml")
 bs = prepare("blog.yaml")
 
+def flag(x):
+    return x.replace("${JP}", '<span class="fi fi-jp fi-bordered"></span>')
 
 def profile():
     print(ps)
     html = ""
     for section in ps:
         for header, vs in section.items():
-            html += f'<h2>{header}</h2><table class="profile">'
-            for v in vs:
-                for k, v in v.items():
-                    v = v.replace("${JP}", '<span class="fi fi-jp fi-bordered"></span>')
-                    html += f'<tr><td>{k}</td><td>{v}</td></tr>'
-            html += '</table>'
+            html += f'<h2>{header}</h2>'
+
+            if isinstance(vs[0], dict):
+                html += '<table class="profile">'
+                for v in vs:
+                    for k, v in v.items():
+                        html += f'<tr><td>{flag(k)}</td><td>{flag(v)}</td></tr>'
+                html += '</table>'
+            else:
+                html += '<br />'.join([flag(x) for x in vs])
     return html
 
 def blog(bs):

@@ -70,58 +70,14 @@
     </style>
   </head>
   <body>
-    <div class="container blind">
-      <div class="left">
-        <img src="img/Oct2023.jpg" style="max-width: 100%" />
-      </div>
-      <div class="right">
-        <h1>Rei Sato</h1>
-        <p>
-          I am a Machine Learning Engineer based in Tokyo, Japan, specializing in ETL pipelines for feature engineering, user profile estimation, and related tasks. My
-          academic interests include large language models (LLMs) and reinforcement learning (RL). I am open to international job opportunities.
-        </p>
-        <p>QR code for this page:<br /><img id="qrcode" style="width: 10rem; height: auto; object-fit: contain" /></p>
-      </div>
-    </div>
-
-    <script>
-      QRCode.toDataURL(window.location.href, { width: 250 }, (_, url) => {
-        document.getElementById("qrcode").src = url;
-      });
-    </script>
-
-    <h2>Profile</h2>
-    <table class="profile">
-      <tr>
-        <td>Name</td>
-        <td>Rei Sato</td>
-      </tr>
-      <tr>
-        <td>Name (Pronunciation)</td>
-        <td>Ray SAH-toh</td>
-      </tr>
-      <tr>
-        <td>Name (in Kanji)</td>
-        <td>佐藤 怜</td>
-      </tr>
-      <tr>
-        <td>Work Authorization</td>
-        <td><span class="fi fi-jp fi-bordered"></span>Japan (no sponsorship required, no expiry)</td>
-      </tr>
-      <tr>
-        <td>Language</td>
-        <td>Japanese (native)<br />English</td>
-      </tr>
-      <tr>
-        <td>Contact</td>
-        <td><a href="https://www.linkedin.com/in/rei-sato-806b40282">LinkedIn</a></td>
-      </tr>
-    </table>
+    <h1>Rei Sato</h1>
     <h2>Work Experience</h2>
     <table class="profile">
       <tr>
         <td><strong>LY Corporation</strong><br />(formerly <strong>LINE Corporation</strong>)<br /><span class="fi fi-jp fi-bordered"></span>Tokyo, Japan</td>
-        <td><strong>Machine Learning Engineer</strong> (Full-time)<br />2022 - Present</td>
+        <td>
+          <p><strong>Machine Learning Engineer</strong> (Full-time)<br />2022 - Present</p>
+        </td>
       </tr>
     </table>
     <h2>Education</h2>
@@ -129,8 +85,8 @@
       <tr>
         <td><strong>University of Tsukuba</strong><br /><span class="fi fi-jp fi-bordered"></span>Tsukuba, Japan</td>
         <td>
-          <strong>Master of Engineering</strong> (Computer Science)<br />2020 - 2022<br /><br /><strong>Bachelor of Information Engineering</strong> (Computer Science)<br />2016
-          - 2020
+          <p><strong>Master of Engineering</strong> (Computer Science)<br />2020 - 2022</p>
+          <p><strong>Bachelor of Information Engineering</strong> (Computer Science)<br />2016 - 2020</p>
         </td>
       </tr>
     </table>
@@ -347,15 +303,10 @@
       </table>
     </details>
 
-    <input type="checkbox" id="toggle" class="blind" />
+    <p>QR code for this page:<br /><img id="qrcode" style="width: 10rem; height: auto; object-fit: contain" /></p>
     <script>
-      document.getElementById("toggle").addEventListener("change", function () {
-        document.querySelectorAll(".blind").forEach((el) => {
-          el.style.display = this.checked ? "none" : "block";
-        });
-        document.querySelectorAll("details").forEach((el) => {
-          el.setAttribute("open", "");
-        });
+      QRCode.toDataURL(window.location.href, { width: 250 }, (_, url) => {
+        document.getElementById("qrcode").src = url;
       });
     </script>
   </body>

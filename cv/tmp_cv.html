@@ -70,26 +70,7 @@
     </style>
   </head>
   <body>
-    <div class="container blind">
-      <div class="left">
-        <img src="img/Oct2023.jpg" style="max-width: 100%" />
-      </div>
-      <div class="right">
-        <h1>Rei Sato</h1>
-        <p>
-          I am a Machine Learning Engineer based in Tokyo, Japan, specializing in ETL pipelines for feature engineering, user profile estimation, and related tasks. My
-          academic interests include large language models (LLMs) and reinforcement learning (RL). I am open to international job opportunities.
-        </p>
-        <p>QR code for this page:<br /><img id="qrcode" style="width: 10rem; height: auto; object-fit: contain" /></p>
-      </div>
-    </div>
-
-    <script>
-      QRCode.toDataURL(window.location.href, { width: 250 }, (_, url) => {
-        document.getElementById("qrcode").src = url;
-      });
-    </script>
-
+    <h1>Rei Sato</h1>
     ${PROFILE}
 
     <h2>Highlights</h2>
@@ -99,15 +80,10 @@
     <h2>Blog Posts</h2>
     ${BLOG}
 
-    <input type="checkbox" id="toggle" class="blind" />
+    <p>QR code for this page:<br /><img id="qrcode" style="width: 10rem; height: auto; object-fit: contain" /></p>
     <script>
-      document.getElementById("toggle").addEventListener("change", function () {
-        document.querySelectorAll(".blind").forEach((el) => {
-          el.style.display = this.checked ? "none" : "block";
-        });
-        document.querySelectorAll("details").forEach((el) => {
-          el.setAttribute("open", "");
-        });
+      QRCode.toDataURL(window.location.href, { width: 250 }, (_, url) => {
+        document.getElementById("qrcode").src = url;
       });
     </script>
   </body>

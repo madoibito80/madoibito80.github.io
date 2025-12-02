@@ -40,7 +40,7 @@
         width: 100%;
       }
       table.profile td:first-child {
-        width: 25rem;
+        width: 22rem;
       }
       table.blog td:first-child {
         width: 10rem;
@@ -67,6 +67,12 @@
       a:visited {
         color: blue;
       }
+      ul {
+        margin: 0;
+      }
+      div.role {
+        margin: 10px 0;
+      }
     </style>
   </head>
   <body>
@@ -76,7 +82,7 @@
       <tr>
         <td><strong>LY Corporation</strong><br />(formerly <strong>LINE Corporation</strong>)<br /><span class="fi fi-jp fi-bordered"></span>Tokyo, Japan</td>
         <td>
-          <p><strong>Machine Learning Engineer</strong><br />2022 - Present</p>
+          <div class="role"><strong>Machine Learning Engineer</strong><br />2022 - Present</div>
         </td>
       </tr>
     </table>
@@ -85,177 +91,17 @@
       <tr>
         <td><strong>University of Tsukuba</strong><br /><span class="fi fi-jp fi-bordered"></span>Tsukuba, Japan</td>
         <td>
-          <p><strong>Master of Engineering</strong> (Computer Science)<br />2020 - 2022</p>
-          <p><strong>Bachelor of Information Engineering</strong> (Computer Science)<br />2016 - 2020</p>
+          <div class="role">
+            <strong>Master of Engineering</strong> (Computer Science)<br />2020 - 2022
+            <ul>
+              <li>First-author paper on neural architecture search accepted at AAAI<br />[<a href="https://arxiv.org/abs/2012.06138">arXiv</a>]</li>
+              <li>First-author paper on reinforcement learning accepted at IJCNN<br />[<a href="https://arxiv.org/abs/2301.13343">arXiv</a>]</li>
+            </ul>
+          </div>
+          <div class="role"><strong>Bachelor of Information Engineering</strong> (Computer Science)<br />2016 - 2020</div>
         </td>
       </tr>
     </table>
-
-    <h2>Highlights</h2>
-    <details open>
-      <summary class="heading">Research on Large Language Models<span class="period">Jan. 2024 - Present</span></summary>
-      <ul>
-        <li>Contributed to research on preference tuning (alignment) of large language models (LLMs), which led to a paper accepted at NeurIPS.</li>
-        <li>Led a survey project and gathered information on recommender systems and large language models.</li>
-      </ul>
-      <details open>
-        <summary>Publications in en</summary>
-        <ol>
-          <li>
-            Akifumi Wachi, Thien Q. Tran, <u>Rei Sato</u>, Takumi Tanabe, Youhei Akimoto. Stepwise Alignment for Constrained Language Model Policy Optimization. Neural
-            Information Processing Systems (NeurIPS), 2024. [<a href="https://arxiv.org/abs/2404.11049">arXiv</a>]
-          </li>
-          <li>
-            Thien Q. Tran, Akifumi Wachi, <u>Rei Sato</u>, Takumi Tanabe, Youhei Akimoto. Vulnerability Mitigation for Safety-Aligned Language Models via Debiasing.
-            arXiv, 2025. [<a href="https://arxiv.org/abs/2502.02153">arXiv</a>]
-          </li>
-          <li><a href="../blog/llm_webagent_benchmark/index.html">40+ Web Agent Benchmarks for Evaluating GUI Understanding and Manipulation Abilities</a>, Mar. 2025</li>
-          <li><a href="../blog/llm_rust_hf/index.html">Exploring Llama 3.2 with Rust and Hugging Face Tools</a>, Dec. 2024</li>
-        </ol>
-      </details>
-    </details>
-    <details open>
-      <summary class="heading">Work at LINE<span class="period">Apr. 2022 - Present</span></summary>
-      <ul>
-        <li>Worked on machine learning models and data pipelines for LINE, Japan’s leading messaging platform with 100M users.</li>
-        <li>Designed and operated pipelines to process and store user interaction histories as features to build recommender systems.</li>
-        <li>
-          Contributed to developing machine learning models to predict user profiles (such as age and gender) for personalized advertising by utilizing the above
-          features.
-        </li>
-        <li>
-          Worked on improving the sticker suggestion feature, which suggests stickers based on user input text. This involved creating an annotation tool, defining
-          metrics for evaluating the suggestion feature, and building a pipeline to calculate these metrics from actual user logs.
-        </li>
-        <li>The following technologies were utilized in these projects: Python, Apache Spark, Apache Airflow, Git, Docker, and Streamlit.</li>
-      </ul>
-    </details>
-    <details open>
-      <summary class="heading">Research on Sim-to-Real in Reinforcement Learning<span class="period">Apr. 2019 - 2022, 2025</span></summary>
-      <ul>
-        <li>
-          A common approach to applying reinforcement learning in real-world applications is to pretrain agents using simulators or offline datasets, as training them
-          while interacting with the real world can be both costly and risky. However, since pre-trained agents may still fail in real-world operations, a method to
-          bridge the gap between safe pre-training and actual deployment is necessary.
-        </li>
-        <li>
-          Led research proposing a method for pretraining vision-based agents in simulators without requiring a renderer; the paper was accepted at IJCNN with an
-          acceptance rate of 55.4% (1467 out of 2646 for IEEE WCCI).
-        </li>
-      </ul>
-      <details open>
-        <summary>Publications in en</summary>
-        <ol>
-          <li>
-            <u>Rei Sato</u>, Kazuto Fukuchi, Jun Sakuma, Youhei Akimoto. Few-Shot Image-to-Semantics Translation for Policy Transfer in Reinforcement Learning.
-            International Joint Conference on Neural Networks (IJCNN), 2022. [<a href="https://arxiv.org/abs/2301.13343">arXiv</a>][<a
-              href="https://ieeexplore.ieee.org/document/9892464"
-              >IEEE Xplore</a
-            >]
-          </li>
-          <li>
-            Takumi Tanabe, <u>Rei Sato</u>, Kazuto Fukuchi, Jun Sakuma, Youhei Akimoto. Max-Min Off-Policy Actor-Critic Method Focusing on Worst-Case Robustness to Model
-            Misspecification. Neural Information Processing Systems (NeurIPS), 2022. [<a href="https://arxiv.org/abs/2211.03413">arXiv</a>]
-          </li>
-          <li>
-            Akifumi Wachi, Kohei Miyaguchi, Takumi Tanabe, <u>Rei Sato</u>, Youhei Akimoto. A Provable Approach for End-to-End Safe Reinforcement Learning. Neural
-            Information Processing Systems (NeurIPS), 2025. [<a href="https://arxiv.org/abs/2505.21852">arXiv</a>]
-          </li>
-        </ol>
-      </details>
-      <details class="blind">
-        <summary>Publications in ja</summary>
-        <ol>
-          <li>
-            <u>佐藤怜</u>, 福地一斗, 佐久間淳, 秋本洋平. 強化学習における遷移確率を用いたドメイン適応による方策の転移. 人工知能学会全国大会, 2020. [<a
-              href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2020/0/JSAI2020_2J5GS203/_article/-char/ja/"
-              >J-STAGE</a
-            >]
-          </li>
-          <li>
-            田邊拓実, <u>佐藤怜</u>, 福地一斗, 佐久間淳, 秋本洋平. モデル化誤差に頑健な Max-Min Off-Policy Actor-Critic. 人工知能学会全国大会, 2022. [<a
-              href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2022/0/JSAI2022_2C5GS203/_article/-char/ja"
-              >J-STAGE</a
-            >]
-          </li>
-        </ol>
-      </details>
-    </details>
-    <details>
-      <summary class="heading">Research on Neural Architecture Search<span class="period">Apr. 2018 - 2022</span></summary>
-      <ul>
-        <li>
-          Neural Architecture Search (NAS) algorithmically optimizes the architecture of deep neural networks, and gradient-based NAS defines differentiable architectures
-          to simultaneously optimize both the architecture and weight parameters via gradient descent.
-        </li>
-        <li>
-          Led research on gradient-based NAS, proposing a method that converges with fewer updates while minimizing GPU memory usage; received the JSAI Annual Conference
-          Student Incentive Award in Jul. 2019 and was accepted at AAAI with an acceptance rate of 21.4% (1692 out of 7911).
-        </li>
-        <li>
-          Contributed to research on automatic termination for gradient-based NAS by exploiting an upper bound on the decay of generalization error to determine when to
-          stop the search process.
-        </li>
-      </ul>
-      <details open>
-        <summary>Publications in en</summary>
-        <ol>
-          <li>
-            <u>Rei Sato</u>, Jun Sakuma, Youhei Akimoto. AdvantageNAS: Efficient Neural Architecture Search with Credit Assignment. AAAI Conference on Artificial
-            Intelligence (AAAI), 2021. [<a href="https://arxiv.org/abs/2012.06138">arXiv</a>][<a href="https://ojs.aaai.org/index.php/AAAI/article/view/17143"
-              >Proceedings</a
-            >]
-          </li>
-          <li>
-            Kotaro Sakamoto, Hideaki Ishibashi, <u>Rei Sato</u>, Shinichi Shirakawa, Youhei Akimoto, Hideitsu Hino. ATNAS: Automatic Termination for Neural Architecture
-            Search. Neural Networks, 2023. [<a href="https://www.sciencedirect.com/science/article/pii/S0893608023003696">ScienceDirect</a>]
-          </li>
-        </ol>
-      </details>
-      <details class="blind">
-        <summary>Publications in ja</summary>
-        <ol>
-          <li>
-            <u>佐藤怜</u>, 秋本洋平, 佐久間淳. 貢献度分配を導入した方策勾配によるNeural Architecture Searchの高速化. 人工知能学会全国大会, 2019. [<a
-              href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2019/0/JSAI2019_2P3J202/_article/-char/ja/"
-              >J-STAGE</a
-            >]
-          </li>
-          <li>
-            坂本航太郎, 石橋英朗, <u>佐藤怜</u>, 白川真一, 秋本洋平, 日野英逸. ニューラルアーキテクチャサーチの最適停止. 人工知能学会全国大会, 2022. [<a
-              href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2022/0/JSAI2022_3J4OS3b01/_article/-char/ja/"
-              >J-STAGE</a
-            >]
-          </li>
-          <li><a href="https://www.ai-gakkai.or.jp/about/award/jsai_award-conf-s/">人工知能学会受賞者【全国大会学生奨励賞】</a></li>
-        </ol>
-      </details>
-    </details>
-    <details>
-      <summary class="heading">As a Graduate Student<span class="period">Apr. 2020 - Mar. 2022</span></summary>
-      <ul>
-        <li>Contributed to research on constrained black-box optimization leveraging deep generative models, with a co-authored paper accepted by IEEE Access.</li>
-        <li>The Dean Award for Academic Excellence was awarded by University of Tsukuba in Mar. 2022.</li>
-      </ul>
-      <details open>
-        <summary>Publications in en</summary>
-        <ol>
-          <li>
-            Naoki Sakamoto, <u>Rei Sato</u>, Kazuto Fukuchi, Jun Sakuma, Youhei Akimoto. Explicitly Constrained Black-Box Optimization With Disconnected Feasible Domains
-            Using Deep Generative Models. IEEE Access, 2022. [<a href="https://ieeexplore.ieee.org/document/9940284">IEEE Xplore</a>]
-          </li>
-        </ol>
-      </details>
-      <details class="blind">
-        <summary>Publications in ja</summary>
-        <ol>
-          <li>
-            阪本直気, <u>佐藤怜</u>, 福地一斗, 佐久間淳, 秋本洋平. 複数の損失関数を用いた深層生成モデルの訓練と制約付きブラックボックス最適化への適用.
-            人工知能学会全国大会, 2021. [<a href="https://www.jstage.jst.go.jp/article/pjsai/JSAI2021/0/JSAI2021_1G3GS2b05/_article/-char/ja/">J-STAGE</a>]
-          </li>
-        </ol>
-      </details>
-    </details>
 
     <hr />
     <h2>Blog Posts</h2>

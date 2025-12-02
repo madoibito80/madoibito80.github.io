@@ -23,20 +23,20 @@ def flag(x):
     return x.replace("${JP}", '<span class="fi fi-jp fi-bordered"></span>')
 
 def profile():
-    print(ps)
     html = ""
     for section in ps:
-        for header, vs in section.items():
-            html += f'<h2>{header}</h2>'
-
-            if isinstance(vs[0], dict):
-                html += '<table class="profile">'
-                for v in vs:
-                    for k, v in v.items():
-                        html += f'<tr><td>{flag(k)}</td><td>{flag(v)}</td></tr>'
-                html += '</table>'
-            else:
-                html += '<br />'.join([flag(x) for x in vs])
+        html += f'<h2>{section["label"]}</h2>'
+        html += '<table class="profile">'
+        for org in section["organizations"]:
+            html += f'<tr><td>{flag(org["label"])}</td><td>'
+            for role in org["roles"]:
+                html += f'<div class="role">{role["label"]}'
+                if "highlights" in role:
+                    listr = ''.join([f'<li>{x}</li>' for x in role["highlights"]])
+                    html += f'<ul>{listr}</ul>'
+                html += '</div>'
+            html += '</td></tr>'
+        html += '</table>'
     return html
 
 def blog(bs):

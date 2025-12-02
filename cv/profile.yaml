@@ -1,4 +1,14 @@
-- Work Experience:
-    - <strong>LY Corporation</strong><br />(formerly <strong>LINE Corporation</strong>)<br />${JP}Tokyo, Japan: <p><strong>Machine Learning Engineer</strong><br />2022 - Present</p>
-- Education:
-    - <strong>University of Tsukuba</strong><br />${JP}Tsukuba, Japan: <p><strong>Master of Engineering</strong> (Computer Science)<br />2020 - 2022</p><p><strong>Bachelor of Information Engineering</strong> (Computer Science)<br />2016 - 2020</p>
+- label: Work Experience
+  organizations:
+    - label: <strong>LY Corporation</strong><br />(formerly <strong>LINE Corporation</strong>)<br />${JP}Tokyo, Japan
+      roles:
+        - label: <strong>Machine Learning Engineer</strong><br />2022 - Present
+- label: Education
+  organizations:
+    - label: <strong>University of Tsukuba</strong><br />${JP}Tsukuba, Japan
+      roles:
+        - label: <strong>Master of Engineering</strong> (Computer Science)<br />2020 - 2022
+          highlights:
+            - First-author paper on neural architecture search accepted at AAAI<br />[<a href="https://arxiv.org/abs/2012.06138">arXiv</a>]
+            - First-author paper on reinforcement learning accepted at IJCNN<br />[<a href="https://arxiv.org/abs/2301.13343">arXiv</a>]
+        - label: <strong>Bachelor of Information Engineering</strong> (Computer Science)<br />2016 - 2020

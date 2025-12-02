@@ -69,25 +69,34 @@
       }
       ul {
         margin: 0;
+        padding-left: 2rem;
       }
       div.role {
         margin: 10px 0;
+      }
+      img#qrcode {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 3rem;
+      }
+      @media print {
+        img#qrcode {
+          display: none;
+        }
       }
     </style>
   </head>
   <body>
     <h1>Rei Sato</h1>
-    ${PROFILE}
 
-    <hr />
-    <h2>Blog Posts</h2>
-    ${BLOG}
-
-    <p>QR code for this page:<br /><img id="qrcode" style="width: 10rem; height: auto; object-fit: contain" /></p>
+    <img id="qrcode" style="width: 10rem; height: auto; object-fit: contain" />
     <script>
       QRCode.toDataURL(window.location.href, { width: 250 }, (_, url) => {
         document.getElementById("qrcode").src = url;
       });
     </script>
+
+    ${PROFILE}
   </body>
 </html>

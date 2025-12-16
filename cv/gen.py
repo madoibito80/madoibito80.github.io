@@ -18,6 +18,7 @@ with open("./tmp_cv.html", "r", encoding="utf-8") as f:
 hl = prepare("highlights.yaml")
 ps = prepare("profile.yaml")
 bs = prepare("blog.yaml")
+ss = prepare("skills.yaml")
 
 def flag(x):
     return x.replace("${JP}", '<span class="fi fi-jp fi-bordered"></span>')
@@ -38,6 +39,17 @@ def profile():
             html += '</td></tr>'
         html += '</table>'
     return html
+
+def skills(ss):
+    html = ""
+    html += '<table class="profile">'
+    for section in ss:
+        html += f'<tr><td>{section["label"]}</td><td><ul>'
+        html += "".join([f'<li>{x}</li>' for x in section["marks"]])
+        html += '</ul></td></tr>'
+    html += '</table>'
+    return html
+
 
 def blog(bs):
     html = ''
@@ -84,6 +96,8 @@ html = highlights()
 tmp = tmp.replace("${HIGHLIGHTS}", html)
 html = blog(bs)
 tmp = tmp.replace("${BLOG}", html)
+html = skills(ss)
+tmp = tmp.replace("${SKILLS}", html)
 
 with open("./cv.html", "w", encoding="utf-8") as f:
     f.write(tmp)
